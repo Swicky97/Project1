@@ -64,9 +64,6 @@ public class EmployeeDao {
 			result = query.executeUpdate();
 		}
 		tx.commit();
-		if(tx != null) {
-			tx.rollback();
-		}
 		if(result >= 1) {
 			return true;
 		} else {
@@ -74,8 +71,32 @@ public class EmployeeDao {
 		}
 	}
 	
+	//not working
 	public boolean update(Employee e) {
-		return false;
+		int id = e.getId();
+		int result = 0;
+		// grab the session
+		Session ses = HibernateUtil.getSession();
+		
+		// begin a tx
+		Transaction tx = ses.beginTransaction();
+		
+		Employee emp = ses.get(Employee.class, id);
+		if (emp != null) {
+			String hql = "UPDATE employees set first_name = :firstname, last_name = :lastname, pwd = :password, username = :user WHERE id = :empId";
+			Query query = ses.createQuery(hql);
+			query.setParameter("first_name", e.getFirstName());
+			query.setParameter("last_name", e.getLastName());
+			query.setParameter("pwd", e.getPassword());
+			query.setParameter("username", e.getFirstName());
+			result = query.executeUpdate();
+		}
+		tx.commit();
+		if(result >= 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 
