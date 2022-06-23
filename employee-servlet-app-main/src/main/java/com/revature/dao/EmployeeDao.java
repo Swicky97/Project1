@@ -2,6 +2,8 @@ package com.revature.dao;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -46,8 +48,30 @@ public class EmployeeDao {
 	}
 	
 	public boolean delete(int id) {
-		return false;
+		 
+		int result = 0;
+		// grab the session
+		Session ses = HibernateUtil.getSession();
 		
+		// begin a tx
+		Transaction tx = ses.beginTransaction();
+		
+		Employee emp = ses.get(Employee.class, id);
+		if (emp != null) {
+			String hql = "DELETE FROM employees WHERE id = :empId";
+			Query query = ses.createQuery(hql);
+			query.setParameter("empId", id);
+			result = query.executeUpdate();
+		}
+		tx.commit();
+		if(tx != null) {
+			tx.rollback();
+		}
+		if(result >= 1) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean update(Employee e) {
