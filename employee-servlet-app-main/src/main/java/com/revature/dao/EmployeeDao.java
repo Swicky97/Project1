@@ -58,7 +58,7 @@ public class EmployeeDao {
 		
 		Employee emp = ses.get(Employee.class, id);
 		if (emp != null) {
-			String hql = "DELETE FROM employees WHERE id = :empId";
+			String hql = "DELETE FROM Employee WHERE id = :empId";
 			Query query = ses.createQuery(hql);
 			query.setParameter("empId", id);
 			result = query.executeUpdate();
@@ -83,11 +83,12 @@ public class EmployeeDao {
 		
 		Employee emp = ses.get(Employee.class, id);
 		if (emp != null) {
-			String hql = "UPDATE employees set first_name = :firstname, last_name = :lastname, pwd = :password, username = :user WHERE id = :empId";
+			String hql = "UPDATE Employee e SET e.firstName = :firstname, e.lastName = :lastname, e.password = :password, e.username = :username WHERE e.id = :empId";
 			Query query = ses.createQuery(hql);
-			query.setParameter("first_name", e.getFirstName());
-			query.setParameter("last_name", e.getLastName());
-			query.setParameter("pwd", e.getPassword());
+			query.setParameter("empId", id);
+			query.setParameter("firstname", e.getFirstName());
+			query.setParameter("lastname", e.getLastName());
+			query.setParameter("password", e.getPassword());
 			query.setParameter("username", e.getFirstName());
 			result = query.executeUpdate();
 		}
