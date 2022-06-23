@@ -85,10 +85,11 @@ public class EmployeeDao {
 		if (emp != null) {
 			String hql = "UPDATE employees set first_name = :firstname, last_name = :lastname, pwd = :password, username = :user WHERE id = :empId";
 			Query query = ses.createQuery(hql);
-			query.setParameter("first_name", e.getFirstName());
-			query.setParameter("last_name", e.getLastName());
-			query.setParameter("pwd", e.getPassword());
-			query.setParameter("username", e.getFirstName());
+			query.setParameter("empId", id);
+			query.setParameter("firstname", e.getFirstName());
+			query.setParameter("lastname", e.getLastName());
+			query.setParameter("password", e.getPassword());
+			query.setParameter("user", e.getFirstName());
 			result = query.executeUpdate();
 		}
 		tx.commit();
