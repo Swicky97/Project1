@@ -40,7 +40,7 @@ public class EmployeeDao {
 		// make an HQL -- Hibernate Query Language: odd mix of OOP & native SQL
 		 List<Employee> emps = ses.createQuery("from Employee", Employee.class).list();
 		
-		 // return the list of employees
+		// return the list of employees
 		return emps;
 		
 	}
