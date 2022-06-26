@@ -38,6 +38,7 @@ public class FrontController extends HttpServlet {
 			break;
 		default:
 			// TODO: Redirect to 404
+			response.setStatus(404);
 			break;
 		}
 	}
@@ -56,6 +57,21 @@ public class FrontController extends HttpServlet {
 			RequestHelper.processRegistration(request, response);
 			break;
 		default:
+			response.setStatus(404);
+			break;
+		}
+	}
+	
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) {
+		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		switch(URI) {
+		case "reimbursements/approve":
+			
+			break;
+		case "reimbursements/deny":
+			
+		default:
+			response.setStatus(404);
 			break;
 		}
 	}
