@@ -26,7 +26,6 @@ public class FrontController extends HttpServlet {
 		// we're capturing the very last part of the URI
 		// set up a switch case statement in which we call the appropriate functionality based on the URI returned
 		switch(URI) {
-		
 		case "employees":
 			// invoke some functionality from the request helper which would return all employees
 			RequestHelper.processEmployees(request, response);
@@ -37,7 +36,6 @@ public class FrontController extends HttpServlet {
 			break;
 		default:
 			// TODO: Redirect to 404
-			// custom error page
 			break;
 		}
 	}
@@ -48,6 +46,9 @@ public class FrontController extends HttpServlet {
 		case "login":
 			// invoke some function from the RequestHelper
 			RequestHelper.processLogin(request, response);
+			break;
+		case "logout":
+			RequestHelper.processLogout(request, response);
 			break;
 		case "register":
 			RequestHelper.processRegistration(request, response);

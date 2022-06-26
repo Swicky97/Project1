@@ -43,15 +43,12 @@ public class RequestHelper {
 		
 		// get print writer, then write it out
 		PrintWriter out = response.getWriter();
-		out.write(jsonString); // write the string to the response body
-		
+		out.write(jsonString); // write the string to the response body	
 	}
 	
 	
 	
 	public static void processRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		// 1. extract all values from the parameters
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
 		String username = request.getParameter("username");
@@ -63,41 +60,23 @@ public class RequestHelper {
 			out.println("<a href=\"index.html\">Back</a>");
 			return;
 		}
-		// 2. construct a new employee object
 		Employee e = new Employee(firstname, lastname, username, password);
-		
-		// 3. call the register() method from the service layer
 		int pk = eserv.register(e);
-			
-		// 4. check it's ID...if it's > 0 it's successfull
 		if (pk > 0 ) {
-			
 			e.setId(pk);
 			// add the user to the session
 			HttpSession session = request.getSession();
 			session.setAttribute("the-user", e);
-			
-			// TODO: probably send to dashboard
 			response.sendRedirect(request.getContextPath() + "/dashboard");
-			// using the request dispatcher, forward the request and response to a new resource...
-			// send the user to a new page -- welcome.html
-				
 		} else {
-			
 			// if it's -1, that means the register method failed (and there's probably a duplicate user)
-			// use the PrintWriter to print out 
-			
 			// TODO: provide better logic in the Service layer to check for PSQL exceptions
-			
-			
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
-			
+			response.setStatus(409); // Conflict - duplicate unique value
 			out.println("<h1>Registration failed.  Username already exists</h1>");
 			out.println("<a href=\"index.html\">Back</a>");
 		}
-		
-		
 	}
 	
 	/**
@@ -111,62 +90,56 @@ public class RequestHelper {
 	 * We need to build an html doc with a form that will send these prameters to the method
 	 */
 	public static void processLogin(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
 		// 1. Extract the parameters from the request (username & password)
 		String username = request.getParameter("username");
-		String password = request.getParameter("password"); // use fn + arrow key < or > to get to the beginning or end of a line of code
-		// use ctrl + arrow key to go from word to word
-		
+		String password = request.getParameter("password");
 		// 2. call the confirm login(0 method from the employeeService and see what it returns
 		Employee e = eserv.confirmLogin(username, password);
-		
 		// 3. If the user exists, lets print their info to the screen
 		if (e.getId() > 0) {
-			
 			// grab the session
 			HttpSession session = request.getSession();
-			
 			// add the user to the session
 			session.setAttribute("the-user", e);
-			
-			// alternatively you can redirect to another resource instead of printing out dynamically
-			
-			// print out the user's data with the print writer
-//			response.setContentType("text/html");
-//			
-//			// TODO: probably send to dashboard
-//			request.getRequestDispatcher("welcome.html").forward(request, response);
+			// Redirect to dashboard
 			response.sendRedirect(request.getContextPath() + "/dashboard");
-			
-			
 		} else {
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/html");
-			out.println("No user found, sorry");
-			
-			// Shout out to Gavin for figuring this out -- 204 doesn't return a response body
-//			response.setStatus(204); // 204 meants successful connection to the server, but no content found
+			response.setStatus(401); // Unauthorized
+			response.sendRedirect(request.getContextPath());
 		}
-
 	}
 
+	/**
+	 * Remove current user from session
+	 * @param request
+	 * @param response
+	 * @throws IOException 
+	 */
+	public static void processLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		// TODO: Edit HTML to use requests for logout
+		HttpSession session = request.getSession();
+		session.removeAttribute("the-user"); // Remove 
+		response.sendRedirect(request.getContextPath());
+	}
 
-
+	/**
+	 * Send user to dashboard if logged in
+	 * @param request
+	 * @param response
+	 * @throws ServletException
+	 * @throws IOException
+	 */
 	public static void processDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// If there is an employee in the session, go to dashboard, else back to login
 		HttpSession session = request.getSession();
 		Employee e = (Employee) session.getAttribute("the-user");
 		if(e != null && e.getId() > 0) {
 			// Go to dashboard
-			System.out.println("Employee is logged in.");
 			request.getRequestDispatcher("welcome.html").forward(request, response);
 		} else {
-			System.out.println("Not logged in!");
+			// Redirect to landing page
+			response.setStatus(401);
 			response.sendRedirect(request.getContextPath());
 		}
 	}
-	
-	
-	
-
 }
