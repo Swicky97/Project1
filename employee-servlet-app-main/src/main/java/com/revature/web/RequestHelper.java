@@ -13,11 +13,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
 import com.revature.service.EmployeeService;
+import com.revature.service.ReimbursementService;
 
 public class RequestHelper {
 	
-	// employeeservice
+	// employee service
 	private static EmployeeService eserv = new EmployeeService(new EmployeeDao());
+	// reimbursement service
+	private static ReimbursementService rserv = new ReimbursementService(new ReimbursementDao());
 	// object mapper (for frontend)
 	private static ObjectMapper om = new ObjectMapper();
 	
@@ -141,5 +144,15 @@ public class RequestHelper {
 			response.setStatus(401);
 			response.sendRedirect(request.getContextPath());
 		}
+	}
+
+	/**
+	 * Return a list of all reimbursements
+	 * @param request
+	 * @param response
+	 */
+	public static void processReimbursements(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -30,8 +30,10 @@ public class FrontController extends HttpServlet {
 			// invoke some functionality from the request helper which would return all employees
 			RequestHelper.processEmployees(request, response);
 			break;
+		case "reimbursements":
+			
+			break;
 		case "dashboard":
-			System.out.println("Going to dashboard...");
 			RequestHelper.processDashboard(request, response);
 			break;
 		default:
