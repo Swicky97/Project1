@@ -56,7 +56,13 @@ public class RequestHelper {
 		String lastname = request.getParameter("lastname");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
+		if(firstname == null || lastname == null || username == null || password == null) {
+			PrintWriter out = response.getWriter();
+			response.setContentType("text/html");
+			out.println("<h1>Registration failed.  Username already exists</h1>");
+			out.println("<a href=\"index.html\">Back</a>");
+			return;
+		}
 		// 2. construct a new employee object
 		Employee e = new Employee(firstname, lastname, username, password);
 		
@@ -71,13 +77,15 @@ public class RequestHelper {
 			HttpSession session = request.getSession();
 			session.setAttribute("the-user", e);
 			
+			// TODO: probably send to dashboard
 			request.getRequestDispatcher("welcome.html").forward(request, response);
 			// using the request dispatcher, forward the request and response to a new resource...
 			// send the user to a new page -- welcome.html
 				
 		} else {
+			
 			// if it's -1, that means the register method failed (and there's probably a duplicate user)
-		// use the PrintWriter to print out 
+			// use the PrintWriter to print out 
 			
 			// TODO: provide better logic in the Service layer to check for PSQL exceptions
 			
@@ -87,7 +95,6 @@ public class RequestHelper {
 			
 			out.println("<h1>Registration failed.  Username already exists</h1>");
 			out.println("<a href=\"index.html\">Back</a>");
-
 		}
 		
 		
@@ -125,15 +132,11 @@ public class RequestHelper {
 			// alternatively you can redirect to another resource instead of printing out dynamically
 			
 			// print out the user's data with the print writer
-			PrintWriter out = response.getWriter();
-			response.setContentType("text/html");
-			
-			out.println("<h1>Welcome " + e.getFirstName() + "!</h1>");
-			out.println("<h3>You have successfully logged in!</h3>");
-			
-			// you COULD print the object out as a JSON string
-			String jsonString = om.writeValueAsString(e);
-			out.println(jsonString);
+//			response.setContentType("text/html");
+//			
+//			// TODO: probably send to dashboard
+//			request.getRequestDispatcher("welcome.html").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/dashboard");
 			
 			
 		} else {
@@ -145,6 +148,22 @@ public class RequestHelper {
 //			response.setStatus(204); // 204 meants successful connection to the server, but no content found
 		}
 
+	}
+
+
+
+	public static void processDashboard(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// If there is an employee in the session, go to dashboard, else back to login
+		HttpSession session = request.getSession();
+		Employee e = (Employee) session.getAttribute("the-user");
+		if(e != null && e.getId() > 0) {
+			// Go to dashboard
+			System.out.println("Employee is logged in.");
+			request.getRequestDispatcher("welcome.html").forward(request, response);
+		} else {
+			System.out.println("Not logged in!");
+			response.sendRedirect(request.getContextPath());
+		}
 	}
 	
 	

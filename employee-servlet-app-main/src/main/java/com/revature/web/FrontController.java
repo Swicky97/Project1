@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class FrontController extends HttpServlet {
        
+	// Default serial ID so it stops barking at me
+	private static final long serialVersionUID = 1L;
+
 
 	/**
 	 * This method will be responsible for determining what resource the client is requesting
@@ -22,30 +25,27 @@ public class FrontController extends HttpServlet {
 		// http://localhost:8080/employee-servlet-app/employees -- if they go here it returns all employees in the DB
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		// we're capturing the very last part of the URI
-		
+		System.out.println(URI);
 		// set up a switch case statement in which we call the appropriate functionality based on the URI returned
 		switch(URI) {
 		
 		case "login":
-			
 			// invoke some function from the RequestHelper
 			RequestHelper.processLogin(request, response);
 			break;
-			
 		case "employees":
-			
 			// invoke some functionality from the request helper which would return all employees
 			RequestHelper.processEmployees(request, response);
 			break;
-			
 		case "register":
-			
 			RequestHelper.processRegistration(request, response);
-			
 			break;
-			
-			
+		case "dashboard":
+			System.out.println("Going to dashboard...");
+			RequestHelper.processDashboard(request, response);
+			break;
 		default:
+			// TODO: Redirect to 404
 			// custom error page
 			break;
 		}
