@@ -65,6 +65,7 @@ public class FrontController extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		switch(URI) {
+		// TODO: Add new routes to web.xml
 		case "reimbursements/approve":
 			
 			break;
