@@ -78,7 +78,7 @@ public class RequestHelper {
 			session.setAttribute("the-user", e);
 			
 			// TODO: probably send to dashboard
-			request.getRequestDispatcher("welcome.html").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/dashboard");
 			// using the request dispatcher, forward the request and response to a new resource...
 			// send the user to a new page -- welcome.html
 				
