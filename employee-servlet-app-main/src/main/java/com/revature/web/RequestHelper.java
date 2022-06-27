@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
+import com.revature.models.Role;
 import com.revature.service.EmployeeService;
 
 public class RequestHelper {
@@ -58,7 +59,7 @@ public class RequestHelper {
 		String password = request.getParameter("password");
 		
 		// 2. construct a new employee object
-		Employee e = new Employee(firstname, lastname, username, password);
+		Employee e = new Employee(firstname, lastname, username, password, Role.Employee);
 		
 		// 3. call the register() method from the service layer
 		int pk = eserv.register(e);
