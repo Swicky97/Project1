@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
+import com.revature.models.Role;
 import com.revature.service.EmployeeService;
 
 public class RequestHelper {
@@ -60,7 +61,7 @@ public class RequestHelper {
 			out.println("<a href=\"index.html\">Back</a>");
 			return;
 		}
-		Employee e = new Employee(firstname, lastname, username, password);
+		Employee e = new Employee(firstname, lastname, username, password, Role.Employee);
 		int pk = eserv.register(e);
 		if (pk > 0 ) {
 			e.setId(pk);
