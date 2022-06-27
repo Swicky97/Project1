@@ -13,6 +13,7 @@ import org.junit.Test;
 
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
+import com.revature.models.Role;
 import com.revature.service.EmployeeService;
 
 public class EmployeeServiceTests {
@@ -40,8 +41,8 @@ public class EmployeeServiceTests {
 		
 		// 1. Create a fake list of emps
 		// this is the dummy data we feed to Mockito
-		Employee e1 = new Employee(20, "Bruce", "Banner", "thehulk", "green");
-		Employee e2 = new Employee(21, "Clint", "Barton", "hawkeye", "arrows");
+		Employee e1 = new Employee(20, "Bruce", "Banner", "thehulk", "green", Role.Employee);
+		Employee e2 = new Employee(21, "Clint", "Barton", "hawkeye", "arrows", Role.Manager);
 		
 		List<Employee> emps = new ArrayList<Employee>();
 		emps.add(e1);
@@ -66,8 +67,8 @@ public class EmployeeServiceTests {
 	@Test
 	public void testConfirmLogin_fail() {
 		
-		Employee e1 = new Employee(20, "Bruce", "Banner", "thehulk", "green");
-		Employee e2 = new Employee(21, "Clint", "Barton", "hawkeye", "arrows");
+		Employee e1 = new Employee(20, "Bruce", "Banner", "thehulk", "green", Role.Employee);
+		Employee e2 = new Employee(21, "Clint", "Barton", "hawkeye", "arrows", Role.Manager);
 		
 		List<Employee> emps = new ArrayList<Employee>();
 		emps.add(e1);

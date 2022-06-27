@@ -57,7 +57,7 @@ public class RequestHelper {
 		if(firstname == null || lastname == null || username == null || password == null) {
 			PrintWriter out = response.getWriter();
 			response.setContentType("text/html");
-			out.println("<h1>Registration failed.  Username already exists</h1>");
+			out.println("<h1>Registration failed. One or more null values in request.</h1>");
 			out.println("<a href=\"index.html\">Back</a>");
 			return;
 		}
