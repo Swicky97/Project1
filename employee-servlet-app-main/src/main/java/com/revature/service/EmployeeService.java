@@ -18,42 +18,40 @@ public class EmployeeService {
 	 * 
 	 */
 	public EmployeeService(EmployeeDao edao) {
-		
 		this.edao = edao;
-		
 	}
 	
 	/**
-	 * Our Servlet will pass the username and the password to this method invocation
+	 * Verify login information is correct, send user to their dashboard
 	 * @param username
 	 * @param password
-	 * @return
+	 * @return Employee with matching credentials, else empty Employee object
 	 */
 	public Employee confirmLogin(String username, String password) {
 		
-		// let's stream through all the employees that are returned
+		// TODO Optional: Hash passwords? Plain text password storage is cringe
 		Optional<Employee> possibleEmp = edao.findAll().stream()
 				.filter(e -> (e.getUsername().equals(username) && e.getPassword().equals(password)))
 				.findFirst();
-		
 		// IF the employee is present, return it, otherwise return empty Emp object (with id of 0)
 		return (possibleEmp.isPresent() ? possibleEmp.get() : new Employee());
-		// ideally you should optimize this and set up a custom exception to be returned
+		// (TODO?) ideally you should optimize this and set up a custom exception to be returned
 	}
 	
+	/**
+	 * Get a list of all registered employees
+	 * @return List of Employee objects
+	 */
 	public List<Employee> getAll() {
-		
 		return edao.findAll();
-		
 	}
 	
-	// this service method returns the PK returned by the DAO
+	/**
+	 * Register a new employee and generate an ID for them
+	 * @param e Employee to register
+	 * @return int ID of the new employee
+	 */
 	public int register(Employee e) {
-		// the dao method returns the PK
 		return edao.insert(e);
-		
 	}
-	
-	
-
 }

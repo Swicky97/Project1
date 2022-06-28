@@ -34,6 +34,29 @@ public class EmployeeDao {
 	}
 	
 	// Read
+	public Employee findById(int id) {
+		Employee e = new Employee();
+		// grab the session
+		Session ses = HibernateUtil.getSession();
+		
+		// begin a tx
+		Transaction tx = ses.beginTransaction();
+		
+		Employee emp = ses.get(Employee.class, id);
+		if (emp != null) {
+			String hql = "SELECT * FROM Employee WHERE id = :empId";
+			Query query = ses.createQuery(hql);
+			query.setParameter("empId", id);
+			query.setParameter("firstname", e.getFirstName());
+			query.setParameter("lastname", e.getLastName());
+			query.setParameter("password", e.getPassword());
+			query.setParameter("username", e.getFirstName());
+			query.executeUpdate();
+		}
+		tx.commit();
+		return e;
+	}
+	
 	public List<Employee> findAll() {
 		
 		// grab the session

@@ -31,8 +31,11 @@ public class Reimbursement {
 	@Column(name="reimb_resolved")
 	private long reimbResolved;
 	
+	@Column(name="reimb_approved")
+	private boolean reimbApproved;
+	
 	@Column(name="reimb_description")
-	private long reimbDescription;
+	private String reimbDescription;
 	
 	@Column(name="reimb_author")
 	private int reimbAuthor;
@@ -43,28 +46,40 @@ public class Reimbursement {
 	public Reimbursement() {
 		super();
 	}
-	
-	public Reimbursement(int id, double reimbAmount, long reimbSubmitted, long reimbResolved, long reimbDescription,
-			int reimbAuthor, int reimbResolver) {
+
+	public Reimbursement(double reimbAmount, long reimbSubmitted, long reimbResolved, boolean reimbApproved,
+			String reimbDescription, int reimbAuthor, int reimbResolver) {
 		super();
-		this.id = id;
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
+		this.reimbApproved = reimbApproved;
 		this.reimbDescription = reimbDescription;
 		this.reimbAuthor = reimbAuthor;
 		this.reimbResolver = reimbResolver;
 	}
 
-	public Reimbursement(double reimbAmount, long reimbSubmitted, long reimbResolved, long reimbDescription,
-			int reimbAuthor, int reimbResolver) {
+	
+	
+	public Reimbursement(int id, double reimbAmount, long reimbSubmitted, long reimbResolved, boolean reimbApproved,
+			String reimbDescription, int reimbAuthor, int reimbResolver) {
 		super();
+		this.id = id;
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
 		this.reimbResolved = reimbResolved;
+		this.reimbApproved = reimbApproved;
 		this.reimbDescription = reimbDescription;
 		this.reimbAuthor = reimbAuthor;
 		this.reimbResolver = reimbResolver;
+	}
+
+	public boolean isReimbApproved() {
+		return reimbApproved;
+	}
+
+	public void setReimbApproved(boolean reimbApproved) {
+		this.reimbApproved = reimbApproved;
 	}
 
 	public int getId() {
@@ -99,11 +114,11 @@ public class Reimbursement {
 		this.reimbResolved = reimbResolved;
 	}
 
-	public long getReimbDescription() {
+	public String getReimbDescription() {
 		return reimbDescription;
 	}
 
-	public void setReimbDescription(long reimbDescription) {
+	public void setReimbDescription(String reimbDescription) {
 		this.reimbDescription = reimbDescription;
 	}
 
