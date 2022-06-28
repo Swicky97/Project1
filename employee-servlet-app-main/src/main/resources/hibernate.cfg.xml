@@ -48,6 +48,7 @@
 
 		<!-- List of persistent classes -->
 		<mapping class="com.revature.models.Employee" />
+		<mapping class="com.revature.models.Reimbursement" />
 
 
 	</session-factory>

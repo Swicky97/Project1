@@ -33,7 +33,7 @@ public class FrontController extends HttpServlet {
 			RequestHelper.processEmployees(request, response);
 			break;
 		case "reimbursement":
-			if(request.getQueryString().equals("")) {
+			if(request.getQueryString() == null) {
 				ReimbursementHelper.getReimbursements(request, response);
 			} else {
 				
