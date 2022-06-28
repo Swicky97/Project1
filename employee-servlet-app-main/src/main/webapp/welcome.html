@@ -23,8 +23,16 @@
 	
 	<button id="me-btn">Test</button>
 	<br>
-	<form method="POST" action="reimbursement">
-		<input type="submit" value="Create reimbursement">
+	<form method="POST" action="reimbursement" style="border: 2px solid black; padding: 1rem;">
+		<label for="amount">Amount:</label>
+		<br>
+		<input type="number" name="amount" id="amount" placeholder="Amount to reimburse">
+		<br>
+		<label for="description">Description:</label> 
+		<br>
+		<textarea id="description" name="description" cols="30" rows="5" placeholder="Enter a description."></textarea>
+		<br>
+		<input id="reimb-btn" type="submit" value="Create reimbursement">
 	</form>
 	<br>
 	<form method="POST" action="">
