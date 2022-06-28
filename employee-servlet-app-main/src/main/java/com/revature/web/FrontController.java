@@ -28,6 +28,9 @@ public class FrontController extends HttpServlet {
 		// we're capturing the very last part of the URI
 		// set up a switch case statement in which we call the appropriate functionality based on the URI returned
 		switch(URI) {
+		case "me":
+			RequestHelper.getMe(request, response);
+			break;
 		case "employees":
 			// invoke some functionality from the request helper which would return all employees
 			RequestHelper.processEmployees(request, response);

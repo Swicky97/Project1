@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
@@ -136,12 +137,35 @@ public class RequestHelper {
 		Employee e = (Employee) session.getAttribute("the-user");
 		if(e != null && e.getId() > 0) {
 			// Go to dashboard
+			// TODO: change welcome.html to dashboard's html
+			response.setStatus(200);
 			request.getRequestDispatcher("welcome.html").forward(request, response);
 		} else {
 			// Redirect to landing page
 			response.setStatus(401);
 			response.sendRedirect(request.getContextPath());
 		}
+	}
+
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	public static void getMe(HttpServletRequest request, HttpServletResponse response) {
+		// TODO: Think about what user information we actually want to send (probably not the password)
+		HttpSession session = request.getSession();
+		Employee e = (Employee) session.getAttribute("the-user");
+		try (PrintWriter out = response.getWriter()) {
+			String json = om.writeValueAsString(e);
+			response.setContentType("application/json");
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e1) {
+			response.setStatus(500);
+			e1.printStackTrace();
+		}
+		
 	}
 
 }
