@@ -42,7 +42,7 @@ public class FrontController extends HttpServlet {
 			break;
 		case "reimbursement/mine":
 			ReimbursementHelper.getUsersReimbursements(request, response);
-			break
+			break;
 		case "dashboard":
 			RequestHelper.processDashboard(request, response);
 			break;
