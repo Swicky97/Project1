@@ -7,14 +7,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.dao.ReimbursementDao;
 import com.revature.models.Reimbursement;
 import com.revature.service.ReimbursementService;
 
 public class ReimbursementHelper {
 
-	private static ReimbursementService rserv = new ReimbursementService(/* TODO: Pass in rdao */);
+	private static ReimbursementService rserv = new ReimbursementService(new ReimbursementDao());
 	// object mapper (for frontend)
 	private static ObjectMapper om = new ObjectMapper();
 	
