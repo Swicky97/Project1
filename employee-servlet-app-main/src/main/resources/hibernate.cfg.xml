@@ -4,6 +4,8 @@
 <hibernate-configuration>
 	<session-factory>
 
+		<property name="hibernate.temp.use_jdbc_metadata_defaults">false</property>
+
 		<property name="hibernate.dialect">
 			org.hibernate.dialect.PostgreSQLDialect
 		</property>
