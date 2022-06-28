@@ -34,19 +34,28 @@ public class ReimbursementHelper {
 		out.write(jsonString); // write the string to the response body	
 	}
 
+	/**
+	 * Creates a new reimbursement request, so long as the user is logged in
+	 * @param request
+	 * @param response
+	 */
 	public static void addReimbursement(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("application/json");
-		HttpSession session = request.getSession();
-		Employee user = (Employee) session.getAttribute("the-user");
-		if(user == null) return;
-		double amount = Double.parseDouble(request.getParameter("amount"));
-		long submitted = System.currentTimeMillis();
-		long resolved = -1L;
-		boolean approved = false;
-		int author = user.getId();
-		String description = request.getParameter("description");
-		Reimbursement r = new Reimbursement(amount, submitted, resolved, approved, description, author, -1);
 		try (PrintWriter out = response.getWriter()) {
+			HttpSession session = request.getSession();
+			Employee user = (Employee) session.getAttribute("the-user");
+			if(user == null) {
+				response.setStatus(401);
+				out.print("{\"message\": \"You must be logged in to submit a reimbursement request.\"}");
+				return;
+			}
+			double amount = Double.parseDouble(request.getParameter("amount"));
+			long submitted = System.currentTimeMillis();
+			long resolved = -1L;
+			boolean approved = false;
+			int author = user.getId();
+			String description = request.getParameter("description");
+			Reimbursement r = new Reimbursement(amount, submitted, resolved, approved, description, author, -1);
 			int id = rserv.add(r);
 			r.setId(id);
 			String json = om.writeValueAsString(r);
