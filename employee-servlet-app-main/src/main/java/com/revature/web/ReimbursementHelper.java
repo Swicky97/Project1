@@ -6,9 +6,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.ReimbursementDao;
+import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 import com.revature.service.ReimbursementService;
 
@@ -19,37 +21,39 @@ public class ReimbursementHelper {
 	private static ObjectMapper om = new ObjectMapper();
 	
 	/**
-	 * Return a list of all reimbursements
+	 * Return a JSON list of all reimbursements
 	 * @param request
 	 * @param response
 	 * @throws IOException 
 	 */
 	public static void getReimbursements(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("application/json");
-		
-		// 2. Call the getAll() method from the employee service
 		List<Reimbursement> reimbursements = rserv.getAll();
-		
-		// 3. transform the list to a string
 		String jsonString = om.writeValueAsString(reimbursements);
-		
-		// get print writer, then write it out
 		PrintWriter out = response.getWriter();
 		out.write(jsonString); // write the string to the response body	
 	}
 
 	public static void addReimbursement(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-		
-		PrintWriter out;
-		try {
-			out = response.getWriter();
-			response.setContentType("application/json");
-			out.print("{\"message\": \"Adding...\"}");
+		response.setContentType("application/json");
+		HttpSession session = request.getSession();
+		Employee user = (Employee) session.getAttribute("the-user");
+		if(user == null) return;
+		double amount = Double.parseDouble(request.getParameter("amount"));
+		long submitted = System.currentTimeMillis();
+		long resolved = -1L;
+		boolean approved = false;
+		int author = user.getId();
+		String description = request.getParameter("description");
+		Reimbursement r = new Reimbursement(amount, submitted, resolved, approved, description, author, -1);
+		try (PrintWriter out = response.getWriter()) {
+			int id = rserv.add(r);
+			r.setId(id);
+			String json = om.writeValueAsString(r);
+			response.setStatus(200);
+			out.print(json);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			response.setStatus(500);
 			e.printStackTrace();
 		}
 	}
