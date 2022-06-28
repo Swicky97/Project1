@@ -33,8 +33,16 @@ public class FrontController extends HttpServlet {
 			RequestHelper.processEmployees(request, response);
 			break;
 		case "reimbursement":
-			ReimbursementHelper.getReimbursements(request, response);
+			if(request.getQueryString().equals("")) {
+				ReimbursementHelper.getReimbursements(request, response);
+			} else {
+				
+				ReimbursementHelper.getAssociatedReimbursements(request, response);
+			}
 			break;
+		case "reimbursement/mine":
+			ReimbursementHelper.getUsersReimbursements(request, response);
+			break
 		case "dashboard":
 			RequestHelper.processDashboard(request, response);
 			break;

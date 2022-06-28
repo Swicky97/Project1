@@ -11,7 +11,7 @@ import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 import com.revature.util.HibernateUtil;
 
-public class ReimbursementDao {
+public class ReimbursementDao implements IReimbursementDao {
 
 	public int insert (Reimbursement r) {
 		
