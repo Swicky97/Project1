@@ -24,7 +24,7 @@ public class ReimbursementHelper {
 	 * @param response
 	 * @throws IOException 
 	 */
-	public static void processReimbursements(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public static void getReimbursements(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO Auto-generated method stub
 		response.setContentType("application/json");
 		
@@ -37,5 +37,53 @@ public class ReimbursementHelper {
 		// get print writer, then write it out
 		PrintWriter out = response.getWriter();
 		out.write(jsonString); // write the string to the response body	
+	}
+
+	public static void addReimbursement(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			response.setContentType("application/json");
+			out.print("{\"message\": \"Adding...\"}");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void processApprove(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			response.setContentType("application/json");
+			out.print("{\"message\": \"Approving...\"}");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void processDeny(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+		PrintWriter out;
+		try {
+			out = response.getWriter();
+			response.setContentType("application/json");
+			out.print("{\"message\": \"Denying...\"}");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	public static void processDelete(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
 	}
 }

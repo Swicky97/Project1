@@ -20,8 +20,18 @@ public class ReimbursementService {
 	}
 	
 	/**
-	 * 
+	 * Removes a reimbursement with the given id
+	 * @param id
+	 * @return
+	 */
+	public boolean remove(int id) {
+		return rdao.delete(id);
+	}
+	
+	/**
+	 * Approves a reimbursement for the resolver
 	 * @param r
+	 * @param resolver
 	 * @return
 	 */
 	public Reimbursement approve(Reimbursement r, int resolver) {
@@ -37,6 +47,12 @@ public class ReimbursementService {
 		return r;
 	}
 	
+	/**
+	 * Denies a reimbursement for the resolver
+	 * @param r
+	 * @param resolver
+	 * @return
+	 */
 	public Reimbursement deny(Reimbursement r, int resolver) {
 		if(r.isReimbApproved()) return r; // can't renege
 //		r.setReimbResolved(System.currentTimeMillis()); // Uncomment for actual use

@@ -1,6 +1,8 @@
 package com.revature.web;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -30,8 +32,8 @@ public class FrontController extends HttpServlet {
 			// invoke some functionality from the request helper which would return all employees
 			RequestHelper.processEmployees(request, response);
 			break;
-		case "reimbursements":
-			ReimbursementHelper.processReimbursements(request, response);
+		case "reimbursement":
+			ReimbursementHelper.getReimbursements(request, response);
 			break;
 		case "dashboard":
 			RequestHelper.processDashboard(request, response);
@@ -39,7 +41,6 @@ public class FrontController extends HttpServlet {
 		default:
 			// TODO: Redirect to 404
 			response.setStatus(404);
-			break;
 		}
 	}
 
@@ -56,25 +57,46 @@ public class FrontController extends HttpServlet {
 		case "register":
 			RequestHelper.processRegistration(request, response);
 			break;
+		case "reimbursement":
+			ReimbursementHelper.addReimbursement(request, response);
+			break;
 		default:
 			response.setStatus(404);
-			break;
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			out.print("{\"message\": \"No resource found at location: " + URI + "\"}");
 		}
 	}
 	
-	protected void doPut(HttpServletRequest request, HttpServletResponse response) {
+	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		switch(URI) {
 		// TODO: Add new routes to web.xml
-		case "reimbursements/approve":
-			
+		case "reimbursement/approve":
+			ReimbursementHelper.processApprove(request, response);
 			break;
-		case "reimbursements/deny":
-			
+		case "reimbursement/deny":
+			ReimbursementHelper.processDeny(request, response);
+			break;
 		default:
 			response.setStatus(404);
-			break;
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			out.print("{\"message\": \"No resource found at location: " + URI + "\"}");
 		}
 	}
 
+	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		switch(URI) {
+		case "reimbursement":
+			ReimbursementHelper.processDelete(request, response);
+			break;
+		default:
+			response.setStatus(404);
+			response.setContentType("application/json");
+			PrintWriter out = response.getWriter();
+			out.print("{\"message\": \"No resource found at location: " + URI + "\"}");
+		}
+	}
 }
