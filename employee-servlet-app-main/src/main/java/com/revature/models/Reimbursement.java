@@ -35,7 +35,7 @@ public class Reimbursement {
 	private boolean reimbApproved;
 	
 	@Column(name="reimb_description")
-	private long reimbDescription;
+	private String reimbDescription;
 	
 	@Column(name="reimb_author")
 	private int reimbAuthor;
@@ -48,7 +48,7 @@ public class Reimbursement {
 	}
 
 	public Reimbursement(double reimbAmount, long reimbSubmitted, long reimbResolved, boolean reimbApproved,
-			long reimbDescription, int reimbAuthor, int reimbResolver) {
+			String reimbDescription, int reimbAuthor, int reimbResolver) {
 		super();
 		this.reimbAmount = reimbAmount;
 		this.reimbSubmitted = reimbSubmitted;
@@ -62,7 +62,7 @@ public class Reimbursement {
 	
 	
 	public Reimbursement(int id, double reimbAmount, long reimbSubmitted, long reimbResolved, boolean reimbApproved,
-			long reimbDescription, int reimbAuthor, int reimbResolver) {
+			String reimbDescription, int reimbAuthor, int reimbResolver) {
 		super();
 		this.id = id;
 		this.reimbAmount = reimbAmount;
@@ -114,11 +114,11 @@ public class Reimbursement {
 		this.reimbResolved = reimbResolved;
 	}
 
-	public long getReimbDescription() {
+	public String getReimbDescription() {
 		return reimbDescription;
 	}
 
-	public void setReimbDescription(long reimbDescription) {
+	public void setReimbDescription(String reimbDescription) {
 		this.reimbDescription = reimbDescription;
 	}
 
