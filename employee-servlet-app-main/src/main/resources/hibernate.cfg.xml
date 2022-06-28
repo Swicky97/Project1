@@ -14,9 +14,10 @@
 
 		<!-- Assume test is the database name -->
 		<property name="hibernate.connection.url">
-			jdbc:postgresql://enterprise-220531.cvtq9j4axrge.us-east-1.rds.amazonaws.com:5432/postgres
-		</property>
 
+			jdbc:postgresql://team-4.cvtq9j4axrge.us-east-1.rds.amazonaws.com:5432/postgres
+
+		</property>
 
 		<property name="hibernate.connection.username">
 			postgres
@@ -26,10 +27,10 @@
 			postgres
 		</property>
 
-		<property name="hibernate.default_schema">sophiag</property>
+		<property name="hibernate.default_schema">public</property>
 
 		<!-- CREATE will drop any existing tables and RE-CREATE our tables -->
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<!-- UPDATE: wouldn't delete anything, but would add tables or object -->
 		<!-- VALIDATE: best for production checks to make sure that everything 
