@@ -45,7 +45,15 @@ public class ReimbursementHelper {
 	 */
 	public static void getAssociatedReimbursements(HttpServletRequest request, HttpServletResponse response) {
 		int authorId = Integer.parseInt(request.getParameter("author_id"));
-		
+		List<Reimbursement> rList = rserv.getAuthoredBy(authorId);
+		try (PrintWriter out = response.getWriter()) {
+			String json = om.writeValueAsString(rList);
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e) {
+			response.setStatus(500);
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -63,6 +71,11 @@ public class ReimbursementHelper {
 				out.print("{\"message\": \"You must be logged in to view your reimbursement requests.\"}");
 				return;
 			}
+			int authorId = user.getId();
+			List<Reimbursement> rList = rserv.getAuthoredBy(authorId);
+			String json = om.writeValueAsString(rList);
+			response.setStatus(200);
+			out.write(json);
 		} catch (IOException e) {
 			response.setStatus(500);
 			e.printStackTrace();

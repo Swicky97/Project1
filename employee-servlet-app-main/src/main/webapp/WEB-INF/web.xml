@@ -20,6 +20,7 @@
     <url-pattern>/reimbursement</url-pattern>
     <url-pattern>/reimbursement/approve</url-pattern>
     <url-pattern>/reimbursement/deny</url-pattern>
+    <url-pattern>/reimbursement/mine</url-pattern>
     <!-- http://localhost:8080/employee-servlet-app/login -->
     <!-- http://localhost:8080/employee-servlet-app/employees -->
     <!-- http://localhost:8080/employee-servlet-app/register -->
