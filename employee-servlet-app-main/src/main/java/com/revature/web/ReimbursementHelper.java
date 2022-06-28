@@ -37,7 +37,43 @@ public class ReimbursementHelper {
 	}
 
 	/**
+	 * Retrieve reimbursement requests authored by a given user
+	 * Expects request to have parameters (in query string):
+	 * 		"author_id"
+	 * @param request
+	 * @param response
+	 */
+	public static void getAssociatedReimbursements(HttpServletRequest request, HttpServletResponse response) {
+		int authorId = Integer.parseInt(request.getParameter("author_id"));
+		
+	}
+	
+	/**
+	 * Retrieve all reimbursement requests authored by the current user
+	 * @param request
+	 * @param response
+	 */
+	public static void getUsersReimbursements(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		try (PrintWriter out = response.getWriter()) {
+			HttpSession session = request.getSession();
+			Employee user = (Employee) session.getAttribute("the-user");
+			if(user == null) {
+				response.setStatus(401);
+				out.print("{\"message\": \"You must be logged in to view your reimbursement requests.\"}");
+				return;
+			}
+		} catch (IOException e) {
+			response.setStatus(500);
+			e.printStackTrace();
+		}
+	}
+
+	/**
 	 * Creates a new reimbursement request, so long as the user is logged in
+	 * Expect request to have parameters
+	 * 		"amount"
+	 * 		"description"
 	 * @param request
 	 * @param response
 	 */
@@ -70,6 +106,13 @@ public class ReimbursementHelper {
 		}
 	}
 
+	/**
+	 * Approves a given request, so long as the current user is a Manager
+	 * Expects request to have parameters:
+	 * 		"id", the Reimbursement's ID
+	 * @param request
+	 * @param response
+	 */
 	public static void processApprove(HttpServletRequest request, HttpServletResponse response) {
 		// TODO Re-evaluate when form is ready
 		response.setContentType("application/json");
@@ -106,6 +149,13 @@ public class ReimbursementHelper {
 		}
 	}
 
+	/**
+	 * Denies a given request, so long as the current user is a Manager
+	 * Expects request to have parameters:
+	 * 		"id", the Reimbursement's ID
+	 * @param request
+	 * @param response
+	 */
 	public static void processDeny(HttpServletRequest request, HttpServletResponse response) {
 		// TODO: Re-evaluate when front-end is ready-er
 		response.setContentType("application/json");
@@ -142,6 +192,13 @@ public class ReimbursementHelper {
 		}
 	}
 
+	/**
+	 * Deletes a given request, so long as the current user is the user who created the request
+	 * Expects request to have parameters:
+	 * 		"id", the Reimbursement's ID
+	 * @param request
+	 * @param response
+	 */
 	public static void processDelete(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("application/json");
 		try (PrintWriter out = response.getWriter()) {
