@@ -54,4 +54,10 @@ public class EmployeeService {
 	public int register(Employee e) {
 		return edao.insert(e);
 	}
+	
+	public String viewAccountInfo(Employee e) {
+		 Employee user = edao.findById(e.getId());
+		 return user.toString();
+	}
+	
 }

@@ -161,8 +161,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", password=" + password + ", role=" + role +"]";
+		return String.format("Id: %10d First Name: %10s Last Name: %10s Username: %10s Password: %10s Role: %10s",
+				id, firstName, lastName, username, password, role);
 	}
 	
 	
