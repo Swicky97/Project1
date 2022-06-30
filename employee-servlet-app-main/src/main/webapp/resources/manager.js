@@ -25,6 +25,16 @@ function approve(e) {
     e.preventDefault();
     const id = e.target.getAttribute("data-id");
     console.log("approve", id);
+    fetch(`./reimbursement/approve`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ id })
+    }).then(res => {
+        if(res.ok) {
+            tbody.removeChild(e.target.parentElement.parentElement);
+        }
+    })
+        .catch(console.error);
 }
 
 function deny(e) {
@@ -40,6 +50,7 @@ function deny(e) {
             tbody.removeChild(e.target.parentElement.parentElement);
         }
     })
+        .catch(console.error);
 }
 
 getOutstandingReimbursements();
