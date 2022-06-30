@@ -1,5 +1,6 @@
 package com.revature.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.revature.dao.IReimbursementDao;
@@ -38,10 +39,11 @@ public class ReimbursementService {
 		if(r.isReimbApproved()) return r; // already approved
 		r.setReimbApproved(true);
 		r.setReimbResolver(resolver);
-		r.setReimbResolved(System.currentTimeMillis()); // Uncomment for actual use
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		r.setReimbResolved(timestamp); // Uncomment for actual use
 		if(!rdao.update(r)) {
 			r.setReimbApproved(false); // Reset reimbursement's status
-			r.setReimbResolved(-1L);
+			r.setReimbResolved(null);
 			r.setReimbResolver(-1);
 		}
 		return r;
@@ -55,10 +57,11 @@ public class ReimbursementService {
 	 */
 	public Reimbursement deny(Reimbursement r, int resolver) {
 		if(r.isReimbApproved()) return r; // can't renege
-		r.setReimbResolved(System.currentTimeMillis()); // Uncomment for actual use
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		r.setReimbResolved(timestamp); // Uncomment for actual use
 		r.setReimbResolver(resolver);
 		if(!rdao.update(r)) {
-			r.setReimbResolved(-1); // Reset reimbursement's status
+			r.setReimbResolved(null); // Reset reimbursement's status
 			r.setReimbResolver(-1);
 		}
 		return r;

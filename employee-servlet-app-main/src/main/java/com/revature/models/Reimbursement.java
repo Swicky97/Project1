@@ -1,5 +1,6 @@
 package com.revature.models;
 
+import java.sql.Timestamp;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -26,10 +27,10 @@ public class Reimbursement {
 	private double reimbAmount;
 	
 	@Column(name="reimb_submitted")
-	private long reimbSubmitted;
+	private java.sql.Timestamp reimbSubmitted;
 	
 	@Column(name="reimb_resolved")
-	private long reimbResolved;
+	private java.sql.Timestamp reimbResolved;
 	
 	@Column(name="reimb_approved")
 	private boolean reimbApproved;
@@ -47,7 +48,7 @@ public class Reimbursement {
 		super();
 	}
 
-	public Reimbursement(double reimbAmount, long reimbSubmitted, long reimbResolved, boolean reimbApproved,
+	public Reimbursement(double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved, boolean reimbApproved,
 			String reimbDescription, int reimbAuthor, int reimbResolver) {
 		super();
 		this.reimbAmount = reimbAmount;
@@ -61,7 +62,7 @@ public class Reimbursement {
 
 	
 	
-	public Reimbursement(int id, double reimbAmount, long reimbSubmitted, long reimbResolved, boolean reimbApproved,
+	public Reimbursement(int id, double reimbAmount, Timestamp reimbSubmitted, Timestamp reimbResolved, boolean reimbApproved,
 			String reimbDescription, int reimbAuthor, int reimbResolver) {
 		super();
 		this.id = id;
@@ -98,19 +99,19 @@ public class Reimbursement {
 		this.reimbAmount = reimbAmount;
 	}
 
-	public long getReimbSubmitted() {
+	public Timestamp getReimbSubmitted() {
 		return reimbSubmitted;
 	}
 
-	public void setReimbSubmitted(long reimbSubmitted) {
+	public void setReimbSubmitted(Timestamp reimbSubmitted) {
 		this.reimbSubmitted = reimbSubmitted;
 	}
 
-	public long getReimbResolved() {
+	public Timestamp getReimbResolved() {
 		return reimbResolved;
 	}
 
-	public void setReimbResolved(long reimbResolved) {
+	public void setReimbResolved(Timestamp reimbResolved) {
 		this.reimbResolved = reimbResolved;
 	}
 
