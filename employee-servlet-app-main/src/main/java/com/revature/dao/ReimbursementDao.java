@@ -42,14 +42,15 @@ public class ReimbursementDao implements IReimbursementDao {
 		Reimbursement rem = ses.get(Reimbursement.class, id);
 		
 		if(rem != null) {
-			String hql = "UPDATE Reimbursements set reimb_amount = reimbAmount, reimb_amount = reimbSubmitted, reimb_description = reimbDescription, reimb_resolved = reimbResolved, reimb_author = reimbAuthor, reimb_resolver = reimbResolver, WHERE id = remId";
+			String hql = "UPDATE Reimbursement set reimbAmount = :reimbAmount, reimbSubmitted = :reimbSubmitted, reimbDescription = :reimbDescription, reimbResolved = :reimbResolved, reimbAuthor = :reimbAuthor, reimbResolver = :reimbResolver WHERE id = :remId";
 			Query query = ses.createQuery(hql);
-			query.setParameter("reimb_amount", r.getReimbAmount());
-			query.setParameter("reimb_submitted", r.getReimbSubmitted());
-			query.setParameter("reimb_resolved", r.getReimbResolved());
-			query.setParameter("reimb_description", r.getReimbDescription());
-			query.setParameter("reimb_author", r.getReimbAuthor());
-			query.setParameter("reimb_resolver", r.getReimbResolver());
+			query.setParameter("remId", id);
+			query.setParameter("reimbAmount", r.getReimbAmount());
+			query.setParameter("reimbSubmitted", r.getReimbSubmitted());
+			query.setParameter("reimbResolved", r.getReimbResolved());
+			query.setParameter("reimbDescription", r.getReimbDescription());
+			query.setParameter("reimbAuthor", r.getReimbAuthor());
+			query.setParameter("reimbResolver", r.getReimbResolver());
 			result = query.executeUpdate();
 		}
 		t.commit();
@@ -69,7 +70,7 @@ public class ReimbursementDao implements IReimbursementDao {
 		
 		Reimbursement rem = ses.get(Reimbursement.class, id);
 		if(rem != null) {
-			String hql = "DELETE FROM reimbursements WHERE id = remId";
+			String hql = "DELETE FROM Reimbursement WHERE id = :remId";
 			Query query =ses.createQuery(hql);
 			query.setParameter("remId", id);
 			result = query.executeUpdate();

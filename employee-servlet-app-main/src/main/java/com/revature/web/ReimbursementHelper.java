@@ -135,7 +135,7 @@ public class ReimbursementHelper {
 			JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getInputStream()));
 			JsonObject jsonobj = root.getAsJsonObject();
 
-			double amount = jsonobj.get("amount").getAsInt();
+			double amount = jsonobj.get("amount").getAsDouble();
 			long submitted = System.currentTimeMillis();
 			long resolved = -1L;
 			boolean approved = false;
