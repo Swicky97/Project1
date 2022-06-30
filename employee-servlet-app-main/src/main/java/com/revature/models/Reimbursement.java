@@ -15,7 +15,7 @@ import javax.persistence.Table;
  */
 
 @Entity
-@Table(name="employees") // these annotations come from the JPA (that's the specification)
+@Table(name="reimbursements") // these annotations come from the JPA (that's the specification)
 public class Reimbursement {
 	
 	@Id
