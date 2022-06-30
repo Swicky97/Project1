@@ -2,6 +2,8 @@ package com.revature.models;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,8 +34,8 @@ public class Employee {
 	@Column(name="pwd")
 	private String password;
 	
-	@Column(name="role")
-	private Enum<?> role;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	/**
 	 * no args constructor, all args constructor, all args except ID constructor
@@ -46,7 +48,7 @@ public class Employee {
 		super();
 	}
 	
-	public Employee(int id, String firstName, String lastName, String username, String password, Enum<?> role) {
+	public Employee(int id, String firstName, String lastName, String username, String password, Role role) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -56,7 +58,7 @@ public class Employee {
 		this.role = role;
 	}
 
-	public Employee(String firstName, String lastName, String username, String password, Enum<?> role) {
+	public Employee(String firstName, String lastName, String username, String password, Role role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -109,7 +111,7 @@ public class Employee {
 		return role;
 	}
 
-	public void setRole(Enum<?> role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 
