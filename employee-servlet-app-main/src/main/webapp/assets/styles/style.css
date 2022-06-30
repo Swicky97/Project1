@@ -1,0 +1,20 @@
+body {
+    background-color:blanchedalmond;
+    
+}
+
+.h1 {
+    text-align: center;
+    color: lightcoral;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 75px;
+
+    border: 15px;
+    margin-left: 250px;
+    margin-right: 250px;
+    background-color:lightgoldenrodyellow;
+    border-style: outset;
+    padding: 5px;
+}
+
+
