@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -70,7 +71,7 @@ public class ReimbursementHelper {
 	 */
 	public static void getUnresolved(HttpServletRequest request, HttpServletResponse response) {
 		List<Reimbursement> rList = rserv.getAll().stream()
-				.filter(r -> r.getReimbResolved() < 0)
+				.filter(r -> r.getReimbResolved() != null)
 				.toList();
 		System.out.println(rList);
 		try(PrintWriter out = response.getWriter()) {
@@ -136,8 +137,9 @@ public class ReimbursementHelper {
 			JsonObject jsonobj = root.getAsJsonObject();
 
 			double amount = jsonobj.get("amount").getAsDouble();
-			long submitted = System.currentTimeMillis();
-			long resolved = -1L;
+			Timestamp submitted = new Timestamp(System.currentTimeMillis());
+			submitted.toLocalDateTime();
+			Timestamp resolved = null;
 			boolean approved = false;
 			int author = user.getId();
 			String description = jsonobj.get("description").getAsString();
