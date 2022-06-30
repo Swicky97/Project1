@@ -46,6 +46,9 @@ public class FrontController extends HttpServlet {
 		case "reimbursement/mine":
 			ReimbursementHelper.getUsersReimbursements(request, response);
 			break;
+		case "reimbursement/unresolved":
+			ReimbursementHelper.getUnresolved(request, response);
+			break;
 		case "dashboard":
 			RequestHelper.processDashboard(request, response);
 			break;
@@ -82,7 +85,6 @@ public class FrontController extends HttpServlet {
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
 		switch(URI) {
-		// TODO: Add new routes to web.xml
 		case "reimbursement/approve":
 			ReimbursementHelper.processApprove(request, response);
 			break;

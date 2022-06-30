@@ -1,6 +1,8 @@
 package com.revature.web;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.revature.dao.ReimbursementDao;
 import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
@@ -55,6 +62,28 @@ public class ReimbursementHelper {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Retrieve JSON object of all outstanding reimbursements
+	 * @param request
+	 * @param response
+	 */
+	public static void getUnresolved(HttpServletRequest request, HttpServletResponse response) {
+		List<Reimbursement> rList = rserv.getAll().stream()
+				.filter(r -> r.getReimbResolved() < 0)
+				.toList();
+		System.out.println(rList);
+		try(PrintWriter out = response.getWriter()) {
+			response.setContentType("application/json");
+			String json = om.writeValueAsString(rList);
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e) {
+			response.setStatus(500);
+			e.printStackTrace();
+		}
+	}
+	
 	
 	/**
 	 * Retrieve all reimbursement requests authored by the current user
@@ -101,12 +130,18 @@ public class ReimbursementHelper {
 				out.print("{\"message\": \"You must be logged in to submit a reimbursement request.\"}");
 				return;
 			}
-			double amount = Double.parseDouble(request.getParameter("amount"));
+			
+			JsonParser jsonParser = new JsonParser();
+			JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getInputStream()));
+			JsonObject jsonobj = root.getAsJsonObject();
+
+			double amount = jsonobj.get("amount").getAsInt();
 			long submitted = System.currentTimeMillis();
 			long resolved = -1L;
 			boolean approved = false;
 			int author = user.getId();
-			String description = request.getParameter("description");
+			String description = jsonobj.get("description").getAsString();
+			
 			Reimbursement r = new Reimbursement(amount, submitted, resolved, approved, description, author, -1);
 			int id = rserv.add(r);
 			r.setId(id);
@@ -142,8 +177,13 @@ public class ReimbursementHelper {
 				out.print("{\"message\": \"Only managers may approve reimbursement requests.\"}");
 				return;
 			}
+			
+			JsonParser jsonParser = new JsonParser();
+			JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getInputStream()));
+			JsonObject jsonobj = root.getAsJsonObject();
+			
 			int resolver = user.getId();
-			int id = Integer.parseInt(request.getParameter("id"));
+			int id = jsonobj.get("id").getAsInt();
 			Optional<Reimbursement> optR = rserv.getAll().stream().filter(e -> e.getId() == id).findAny();
 			if(optR.isPresent()) {
 				Reimbursement r = optR.get();
@@ -174,6 +214,11 @@ public class ReimbursementHelper {
 		response.setContentType("application/json");
 		try (PrintWriter out = response.getWriter()) {
 			HttpSession session = request.getSession();
+			
+			JsonParser jsonParser = new JsonParser();
+			JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getInputStream()));
+			JsonObject jsonobj = root.getAsJsonObject();
+			
 			Employee user = (Employee) session.getAttribute("the-user");
 			if(user == null) {
 				response.setStatus(401);
@@ -186,7 +231,9 @@ public class ReimbursementHelper {
 				return;
 			}
 			int resolver = user.getId();
-			int id = Integer.parseInt(request.getParameter("id"));
+			
+			int id = jsonobj.get("id").getAsInt();
+			
 			Optional<Reimbursement> optR = rserv.getAll().stream().filter(e -> e.getId() == id).findAny();
 			if(optR.isPresent()) {
 				Reimbursement r = optR.get();
