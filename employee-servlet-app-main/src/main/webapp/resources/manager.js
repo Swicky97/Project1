@@ -34,7 +34,7 @@ function deny(e) {
     fetch(`./reimbursement/deny`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: { id }
+        body: JSON.stringify({ id })
     }).then(res => {
         if(res.ok) {
             tbody.removeChild(e.target.parentElement.parentElement);
