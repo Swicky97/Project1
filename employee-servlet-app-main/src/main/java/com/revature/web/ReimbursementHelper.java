@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -70,7 +70,7 @@ public class ReimbursementHelper {
 	 */
 	public static void getUnresolved(HttpServletRequest request, HttpServletResponse response) {
 		List<Reimbursement> rList = rserv.getAll().stream()
-				.filter(r -> r.getReimbResolved() < 0)
+				.filter(r -> r.getReimbResolved() == null)
 				.toList();
 		System.out.println(rList);
 		try(PrintWriter out = response.getWriter()) {
@@ -136,13 +136,12 @@ public class ReimbursementHelper {
 			JsonObject jsonobj = root.getAsJsonObject();
 
 			double amount = jsonobj.get("amount").getAsDouble();
-			long submitted = System.currentTimeMillis();
-			long resolved = -1L;
+			Timestamp submitted = Timestamp.from(Instant.now());
 			boolean approved = false;
 			int author = user.getId();
 			String description = jsonobj.get("description").getAsString();
 			
-			Reimbursement r = new Reimbursement(amount, submitted, resolved, approved, description, author, -1);
+			Reimbursement r = new Reimbursement(amount, submitted, null, approved, description, author, -1);
 			int id = rserv.add(r);
 			r.setId(id);
 			String json = om.writeValueAsString(r);
