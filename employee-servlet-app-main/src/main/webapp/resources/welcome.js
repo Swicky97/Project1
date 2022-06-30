@@ -6,7 +6,7 @@ testBtn.addEventListener("click", async () => {
     let data = await getMe();
     console.log(data);
     meContainer.innerHTML = `
-        <p>${data.firstName} ${data.lastName}</p>
+        <p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
     `;
 });
 
