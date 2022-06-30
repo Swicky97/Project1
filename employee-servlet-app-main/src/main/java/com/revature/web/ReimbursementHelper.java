@@ -5,7 +5,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
-import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -136,12 +135,14 @@ public class ReimbursementHelper {
 			JsonObject jsonobj = root.getAsJsonObject();
 
 			double amount = jsonobj.get("amount").getAsDouble();
-			Timestamp submitted = Timestamp.from(Instant.now());
+			Timestamp submitted = new Timestamp(System.currentTimeMillis());
+			submitted.toLocalDateTime();
+			Timestamp resolved = null;
 			boolean approved = false;
 			int author = user.getId();
 			String description = jsonobj.get("description").getAsString();
 			
-			Reimbursement r = new Reimbursement(amount, submitted, null, approved, description, author, -1);
+			Reimbursement r = new Reimbursement(amount, submitted, resolved, approved, description, author, -1);
 			int id = rserv.add(r);
 			r.setId(id);
 			String json = om.writeValueAsString(r);

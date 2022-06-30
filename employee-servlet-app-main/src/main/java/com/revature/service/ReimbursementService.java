@@ -40,6 +40,7 @@ public class ReimbursementService {
 		r.setReimbApproved(true);
 		r.setReimbResolver(resolver);
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		timestamp.toLocalDateTime();
 		r.setReimbResolved(timestamp); // Uncomment for actual use
 		if(!rdao.update(r)) {
 			r.setReimbApproved(false); // Reset reimbursement's status
