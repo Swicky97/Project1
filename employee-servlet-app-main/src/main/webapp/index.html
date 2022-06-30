@@ -11,14 +11,14 @@
 
 
 	<!--  POST requests obfuscate (hide) the parameters and dont' show it in the URL -->
-	<form method="POST" action="login">
+	<form method="POST" action="login" id="login">
 		<!-- http://localhost:8080/employee-servlet-app/login -->
 
 		<label>Username</label> 
-		<input type="text" name="username" placeholder="Enter a username"> <br /> 
+		<input id="username" type="text" name="username" placeholder="Enter a username"> <br /> 
 			
 		<label>Password</label>
-		<input type="password" name="password" placeholder="Enter a password">
+		<input id="password" type="password" name="password" placeholder="Enter a password">
 
 		<input type="submit" value="Login!">
 
@@ -43,7 +43,7 @@
 	
 	</form>
 	
-
+	<script src="./resources/login.js"></script>
 
 </body>
 </html>

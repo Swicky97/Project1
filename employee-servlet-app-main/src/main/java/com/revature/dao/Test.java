@@ -6,10 +6,9 @@ import com.revature.models.Role;
 public class Test {
 
 	public static void main(String[] args) {
+		Employee manager = new Employee("Cameron", "Seibel", "cmseibel", "password", Role.Manager);
 		EmployeeDao edao = new EmployeeDao();
-		Employee e = new Employee(1, "girl" , "one", "password" , "boy1", Role.Employee);
-		boolean b = edao.delete(2);
-		System.out.println(b);
+		edao.insert(manager);
 	}
 
 }
