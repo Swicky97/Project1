@@ -11,16 +11,13 @@ import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 import com.revature.util.HibernateUtil;
 
-public class ReimbursementDao {
+public class ReimbursementDao implements IReimbursementDao {
 
 	public int insert (Reimbursement r) {
-		
 		Session ses = HibernateUtil.getSession();
-		
-		Transaction t = ses.beginTransaction();
-		
+		Transaction tx = ses.beginTransaction();
 		int pk = (int) ses.save(r);
-		
+		tx.commit();
 		return pk;
 	}
 	
@@ -28,7 +25,7 @@ public class ReimbursementDao {
 		
 		Session ses = HibernateUtil.getSession();
 		
-		List<Reimbursement> rem = ses.createQuery("from Reimbursement", Reimbursement.class).list();
+		List<Reimbursement> rem = ses.createQuery("FROM Reimbursement", Reimbursement.class).list();
 		
 		return rem;
 	}

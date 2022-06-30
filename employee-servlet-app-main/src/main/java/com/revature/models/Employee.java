@@ -31,6 +31,9 @@ public class Employee {
 	
 	@Column(name="pwd")
 	private String password;
+	
+	@Column(name="role")
+	private Enum<?> role;
 
 	/**
 	 * no args constructor, all args constructor, all args except ID constructor
@@ -43,21 +46,23 @@ public class Employee {
 		super();
 	}
 	
-	public Employee(int id, String firstName, String lastName, String username, String password) {
+	public Employee(int id, String firstName, String lastName, String username, String password, Enum<?> role) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
+		this.role = role;
 	}
 
-	public Employee(String firstName, String lastName, String username, String password) {
+	public Employee(String firstName, String lastName, String username, String password, Enum<?> role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
+		this.role = role;
 	}
 	
 	public int getId() {
@@ -98,6 +103,14 @@ public class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public Enum<?> getRole() {
+		return role;
+	}
+
+	public void setRole(Enum<?> role) {
+		this.role = role;
 	}
 
 	@Override
@@ -148,8 +161,8 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", password=" + password + "]";
+		return String.format("Id: %10d First Name: %10s Last Name: %10s Username: %10s Password: %10s Role: %10s",
+				id, firstName, lastName, username, password, role);
 	}
 	
 	
