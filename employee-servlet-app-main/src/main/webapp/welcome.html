@@ -6,11 +6,9 @@
 
 <!-- Internal CSS styling -->
 <style>
-
-	h1 {
-		color: red;
-	}
-	
+h1 {
+	color: red;
+}
 </style>
 
 </head>
@@ -18,27 +16,22 @@
 
 	<h1 id="welcome-h1">Welcome to the home page!</h1>
 	<h4>You have successfully registered</h4>
-	
+
 	<br>
-	
+	<br>
+	<form method="POST" action="reimbursement"
+		style="border: 2px solid black; padding: 1rem;">
+		<label for="amount">Amount:</label> <br> <input type="number"
+			name="amount" id="amount" placeholder="Amount to reimburse">
+		<br> <label for="description">Description:</label> <br>
+		<textarea id="description" name="description" cols="30" rows="5"
+			placeholder="Enter a description."></textarea>
+		<br> <input id="reimb-btn" type="submit"
+			value="Create reimbursement">
+	</form>
+	<br>
 	<button id="me-btn">Test</button>
 	<div id="me-container"></div>
-	<br>
-	<form method="POST" action="reimbursement" style="border: 2px solid black; padding: 1rem;">
-		<label for="amount">Amount:</label>
-		<br>
-		<input type="number" name="amount" id="amount" placeholder="Amount to reimburse">
-		<br>
-		<label for="description">Description:</label> 
-		<br>
-		<textarea id="description" name="description" cols="30" rows="5" placeholder="Enter a description."></textarea>
-		<br>
-		<input id="reimb-btn" type="submit" value="Create reimbursement">
-	</form>
-	<br>
-	<form method="POST" action="">
-		<input type="submit" value="View account information">
-	</form>
 	<br>
 	<form method="POST" action="">
 		<input type="submit" value="Update information">
