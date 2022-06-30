@@ -120,7 +120,7 @@ public class RequestHelper {
 	public static void processLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// TODO: Edit HTML to use requests for logout
 		HttpSession session = request.getSession();
-		session.removeAttribute("the-user"); // Remove 
+		session.removeAttribute("the-user");
 		response.sendRedirect(request.getContextPath());
 	}
 
@@ -139,7 +139,11 @@ public class RequestHelper {
 			// Go to dashboard
 			// TODO: change welcome.html to dashboard's html
 			response.setStatus(200);
-			request.getRequestDispatcher("welcome.html").forward(request, response);
+			if(e.getRole().equals(Role.Manager)) {
+				request.getRequestDispatcher("manager.html").forward(request, response);
+			} else {
+				request.getRequestDispatcher("welcome.html").forward(request, response);
+			}
 		} else {
 			// Redirect to landing page
 			response.setStatus(401);

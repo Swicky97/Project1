@@ -4,7 +4,7 @@
  * @returns {Object} the new reimbursment
  */
 async function addReimbursment(reimbursment) {
-    return await fetch("./reimbursments", {
+    return await fetch("./reimbursement", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -30,7 +30,7 @@ async function getMe() {
  * @returns {Object[]}
  */
 async function getMyReimbursments() {
-    return await fetch("./reimbursments/mine")
+    return await fetch("./reimbursement/mine")
         .then(res => res.json())
         .catch(e => console.error(e));
 }
@@ -40,7 +40,7 @@ async function getMyReimbursments() {
  * @returns {Object[]}
  */
 async function getReimbursments() {
-    return await fetch("./reimbursments")
+    return await fetch("./reimbursement")
         .then(res => res.json())
         .catch(e => console.error(e));
 }
