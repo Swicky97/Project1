@@ -1,6 +1,7 @@
 package com.revature.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.revature.dao.IReimbursementDao;
 import com.revature.dao.ReimbursementDao;
@@ -71,7 +72,7 @@ public class ReimbursementService {
 	public List<Reimbursement> getAuthoredBy(int authorId) {
 		List<Reimbursement> result = rdao.findAll().stream()
 				.filter(r -> r.getReimbAuthor() == authorId)
-				.toList();
+				.collect(Collectors.toList());
 		return result;
 	}
 }
