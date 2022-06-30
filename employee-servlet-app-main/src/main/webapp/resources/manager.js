@@ -1,13 +1,22 @@
-const tbody = document.querySelector("tbody");
+const eTBody = document.getElementById("employees-body");
+const rTBody = document.getElementById("resolved-body");
+const uTBody = document.getElementById("unresolved-body");
+const employeesBtn = document.getElementById("view-employees");
+const resolvedBtn = document.getElementById("view-resolved");
+const unresolvedBtn = document.getElementById("view-unresolved");
+const employeeSection = document.getElementById("employees");
+const resolvedSection = document.getElementById("resolved");
+const unresolvedSection = document.getElementById("unresolved");
 
 function getOutstandingReimbursements() {
     fetch("./reimbursement/unresolved")
         .then(res => res.json())
         .then((reimbursements) => {
             console.log(reimbursements);
+            uTBody.innerHTML = "";
             for(let r of reimbursements) {
                 console.log(r);
-                tbody.innerHTML += `
+                uTBody.innerHTML += `
                     <tr>
                         <td>${r.reimbAmount}</td>
                         <td>${r.reimbDescription}</td>
@@ -19,6 +28,27 @@ function getOutstandingReimbursements() {
                 `;
             }
         })
+        .catch(console.error);
+}
+
+function getEmployees() {
+    fetch("./employees")
+        .then(res => res.json())
+        .then((employees) => {
+            console.log(employees);
+            eTBody.innerHTML = "";
+            for(let e of employees) {
+                eTBody.innerHTML += `
+                    <tr data-id=${e.id} onclick="viewReimbursements(event)">
+                        <td>${e.id}</td>
+                        <td>${e.firstName} ${e.lastName}</td>
+                        <td>${e.username}</td>
+                        <td>${e.role}</td>
+                    </tr>
+                `;
+            }
+        })
+        .catch(console.error);
 }
 
 function approve(e) {
@@ -31,7 +61,7 @@ function approve(e) {
         body: JSON.stringify({ id })
     }).then(res => {
         if(res.ok) {
-            tbody.removeChild(e.target.parentElement.parentElement);
+            uTBody.removeChild(e.target.parentElement.parentElement);
         }
     })
         .catch(console.error);
@@ -47,10 +77,29 @@ function deny(e) {
         body: JSON.stringify({ id })
     }).then(res => {
         if(res.ok) {
-            tbody.removeChild(e.target.parentElement.parentElement);
+            uTBody.removeChild(e.target.parentElement.parentElement);
         }
     })
         .catch(console.error);
 }
 
-getOutstandingReimbursements();
+employeesBtn.addEventListener("click", () => {
+    resolvedSection.classList.remove("visible");
+    unresolvedSection.classList.remove("visible");
+    getEmployees();
+    employeeSection.classList.add("visible");
+});
+
+resolvedBtn.addEventListener("click", () => {
+    employeeSection.classList.remove("visible");
+    unresolvedSection.classList.remove("visible");
+    getEmployees();
+    resolvedSection.classList.add("visible");
+})
+
+unresolvedBtn.addEventListener("click", () => {
+    employeeSection.classList.remove("visible");
+    resolvedSection.classList.remove("visible");
+    getOutstandingReimbursements();
+    unresolvedSection.classList.add("visible");
+});

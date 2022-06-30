@@ -13,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -71,7 +69,7 @@ public class ReimbursementHelper {
 	 */
 	public static void getUnresolved(HttpServletRequest request, HttpServletResponse response) {
 		List<Reimbursement> rList = rserv.getAll().stream()
-				.filter(r -> r.getReimbResolved() != null)
+				.filter(r -> r.getReimbResolved() == null)
 				.toList();
 		System.out.println(rList);
 		try(PrintWriter out = response.getWriter()) {
