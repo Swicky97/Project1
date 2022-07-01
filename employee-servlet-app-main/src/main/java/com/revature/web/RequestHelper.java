@@ -171,5 +171,37 @@ public class RequestHelper {
 		}
 		
 	}
+	
+	public static void getReimbursements(HttpServletRequest request, HttpServletResponse response) {
+		// TODO: Think about what user information we actually want to send (probably not the password)
+		HttpSession session = request.getSession();
+		Employee e = (Employee) session.getAttribute("the-user");
+		try (PrintWriter out = response.getWriter()) {
+			String json = om.writeValueAsString(e);
+			response.setContentType("application/json");
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e1) {
+			response.setStatus(500);
+			e1.printStackTrace();
+		}
+		
+	}
+	
+	public static void getReimbursementsById(HttpServletRequest request, HttpServletResponse response) {
+		// TODO: Think about what user information we actually want to send (probably not the password)
+		HttpSession session = request.getSession();
+		Employee e = (Employee) session.getAttribute("the-user");
+		try (PrintWriter out = response.getWriter()) {
+			String json = om.writeValueAsString(e);
+			response.setContentType("application/json");
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e1) {
+			response.setStatus(500);
+			e1.printStackTrace();
+		}
+		
+	}
 
 }
