@@ -25,15 +25,6 @@ async function getMe() {
         .catch(e => console.error(e));
 }
 
-/**
- * Retrieve list of current user's reimbursments
- * @returns {Object[]}
- */
-async function getMyReimbursments() {
-    return await fetch("./reimbursement/mine")
-        .then(res => res.json())
-        .catch(e => console.error(e));
-}
 
 /**
  * For retrieving the entire list of reimbursments
