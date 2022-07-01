@@ -1,18 +1,9 @@
-const testBtn = document.getElementById("me-btn");
-const meContainer = document.getElementById("me-container");
 const reimbBtn = document.getElementById("reimb-btn");
 const viewReimbBtn = document.getElementById("view-reimb-btn");
 const myReimbContainer = document.getElementById("view-reimb-container");
 const updateInfoBtn = document.getElementById("update-info-btn");
 const updateContainer = document.getElementById("update-container");
 
-testBtn.addEventListener("click", async () => {
-    let data = await getMe();
-    console.log(data);
-    meContainer.innerHTML = `
-        <p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
-    `;
-});
 
 reimbBtn.addEventListener("click", async function(e) {
     e.preventDefault();
@@ -36,7 +27,9 @@ updateInfoBtn.addEventListener("click", async () => {
 	updateContainer.innerHTML = `
 		<form onsubmit="getUpdate(event)">
 		
-		<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
+		<p>First Name: ${data.firstName}&emsp; Last Name: ${data.lastName}&emsp; Username: ${data.username}</p>
+		
+		<h4>Update profile information below</h4>
 		
 		<label>First Name: </label> 
 		<input id="first-name" type="text" name="firstname" placeholder="Enter new first name"> <br /> 
@@ -70,7 +63,7 @@ function getUpdate(e) {
     fetch(`./update`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ firstName })
+        body: JSON.stringify({ firstName, lastName, username, password })
     }).then(res => res.json())
         .catch(e => console.error(e));
 }

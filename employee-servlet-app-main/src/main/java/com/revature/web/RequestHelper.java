@@ -226,25 +226,26 @@ public class RequestHelper {
 			JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getInputStream()));
 			JsonObject jsonobj = root.getAsJsonObject();
 
-			String firstname = jsonobj.get("firstname").getAsString();
-			String lastname = jsonobj.get("lastname").getAsString();
+			String firstName = jsonobj.get("firstName").getAsString();
+			String lastName = jsonobj.get("lastName").getAsString();
 			String username = jsonobj.get("username").getAsString();
 			String password = jsonobj.get("password").getAsString();
-			Employee e = new Employee();
-			if(firstname != null) {
-				e.setFirstName(firstname);
+			System.out.println(user.toString());
+			if(firstName != null && !firstName.isEmpty()) {
+				user.setFirstName(firstName);
 			}
-			if(lastname != null) {
-				e.setLastName(firstname);
+			if(lastName != null && !lastName.isEmpty()) {
+				user.setLastName(lastName);
 			}
-			if(username != null) {
-				e.setUsername(username);
+			if(username != null && !username.isEmpty()) {
+				user.setUsername(username);
 			}
-			if(password != null) {
-				e.setPassword(password);
+			if(password != null && !password.isEmpty()) {
+				user.setPassword(password);
 			}
-			eserv.updateInfo(e);
-			String json = om.writeValueAsString(e);
+			System.out.println(user.toString());
+			eserv.updateInfo(user);
+			String json = om.writeValueAsString(user);
 			response.setStatus(200);
 			out.print(json);
 		} catch (IOException e) {
