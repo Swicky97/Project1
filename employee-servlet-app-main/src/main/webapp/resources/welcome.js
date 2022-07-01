@@ -42,13 +42,13 @@ updateInfoBtn.addEventListener("click", async () => {
 		<input id="first-name" type="text" name="firstname" placeholder="Enter new first name"> <br /> 
 		
 		<label>Last Name: </label> 
-		<input type="text" name="lastname" placeholder="Enter new last name"> <br /> 
+		<input id="last-name" type="text" name="lastname" placeholder="Enter new last name"> <br /> 
 
 		<label>Username: </label> 
-		<input type="text" name="username" placeholder="Enter new username"> <br /> 
+		<input id="username" type="text" name="username" placeholder="Enter new username"> <br /> 
 			
 		<label>Password: </label>
-		<input type="password" name="password" placeholder="Enter new password">
+		<input id="password" type="password" name="password" placeholder="Enter new password">
 
 		<input type="submit" value="Update information">
 
@@ -59,8 +59,14 @@ updateInfoBtn.addEventListener("click", async () => {
 function getUpdate(e) {
 	e.preventDefault();
     const firstName = document.getElementById("first-name").value;
+    const lastName = document.getElementById("last-name").value;
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
 	//TODO: Grab other form input values
 	console.log(firstName);
+	console.log(lastName);
+	console.log(username);
+	console.log(password);
     fetch(`./update`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
