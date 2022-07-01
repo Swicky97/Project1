@@ -122,7 +122,7 @@ resolvedBtn.addEventListener("click", () => {
     unresolvedSection.classList.remove("visible");
     getResolvedReimbursements();
     resolvedSection.classList.add("visible");
-})
+});
 
 unresolvedBtn.addEventListener("click", () => {
     employeeSection.classList.remove("visible");
