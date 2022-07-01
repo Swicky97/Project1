@@ -58,7 +58,7 @@ public class ReimbursementHelper {
 
 		response.setContentType("application/json");
 		int authorId = Integer.parseInt(request.getParameter("authorId"));
-		List<Reimbursement> rList = rserv.getAuthoredBy(authorId);
+		List<Reimbursement> rList = rserv.getReimbursementsByAuthor(authorId);
 		try (PrintWriter out = response.getWriter()) {
 			String json = om.writeValueAsString(rList);
 			response.setStatus(200);
@@ -142,7 +142,7 @@ public class ReimbursementHelper {
 				return;
 			}
 			int authorId = user.getId();
-			List<Reimbursement> rList = rserv.getAuthorById(authorId);
+			List<Reimbursement> rList = rserv.getReimbursementsByAuthor(authorId);
 			String json = om.writeValueAsString(rList);
 			response.setStatus(200);
 			out.write(json);

@@ -34,23 +34,23 @@ updateInfoBtn.addEventListener("click", async () => {
 	let data = await getMe();
 	console.log(data);
 	updateContainer.innerHTML = `
-		<form method="POST" action="update" onsubmit="getUpdate(event)">
+		<form onsubmit="getUpdate(event)">
 		
-		<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
-		
-		<label>First Name: </label> 
-		<input id="first-name" type="text" name="firstname" placeholder="Enter new first name"> <br /> 
-		
-		<label>Last Name: </label> 
-		<input type="text" name="lastname" placeholder="Enter new last name"> <br /> 
-
-		<label>Username: </label> 
-		<input type="text" name="username" placeholder="Enter new username"> <br /> 
+			<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
 			
-		<label>Password: </label>
-		<input type="password" name="password" placeholder="Enter new password">
+			<label>First Name: </label> 
+			<input id="first-name" type="text" name="firstname" placeholder="Enter new first name"> <br /> 
+			
+			<label>Last Name: </label> 
+			<input type="text" name="lastname" placeholder="Enter new last name"> <br /> 
 
-		<input type="submit" value="Update information">
+			<label>Username: </label> 
+			<input type="text" name="username" placeholder="Enter new username"> <br /> 
+				
+			<label>Password: </label>
+			<input type="password" name="password" placeholder="Enter new password">
+
+			<input type="submit" value="Update information">
 
 		</form>
 	`;
@@ -64,7 +64,7 @@ function getUpdate(e) {
     fetch(`./update`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ firstName, lastName, username, password })
+        body: JSON.stringify({ firstName })
     }).then(res => res.json())
         .catch(e => console.error(e));
 }
