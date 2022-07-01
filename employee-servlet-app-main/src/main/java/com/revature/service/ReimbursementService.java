@@ -78,4 +78,11 @@ public class ReimbursementService {
 				.toList();
 		return result;
 	}
+	
+	public List<Reimbursement> getResolved() {
+		List<Reimbursement> result = rdao.findAll().stream()
+				.filter(r -> r.getReimbResolved() != null)
+				.toList();
+		return result;
+	}
 }

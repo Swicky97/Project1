@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,18 +14,22 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.revature.dao.EmployeeDao;
 import com.revature.dao.ReimbursementDao;
 import com.revature.models.Employee;
 import com.revature.models.Reimbursement;
 import com.revature.models.Role;
+import com.revature.service.EmployeeService;
 import com.revature.service.ReimbursementService;
 
 public class ReimbursementHelper {
 
 	private static ReimbursementService rserv = new ReimbursementService(new ReimbursementDao());
+	private static EmployeeService eserv = new EmployeeService(new EmployeeDao());
 	// object mapper (for frontend)
 	private static ObjectMapper om = new ObjectMapper();
 	
@@ -50,12 +55,48 @@ public class ReimbursementHelper {
 	 * @param response
 	 */
 	public static void getAssociatedReimbursements(HttpServletRequest request, HttpServletResponse response) {
-		int authorId = Integer.parseInt(request.getParameter("author_id"));
-		List<Reimbursement> rList = rserv.getAuthorById(authorId);
+
+		response.setContentType("application/json");
+		int authorId = Integer.parseInt(request.getParameter("authorId"));
+		List<Reimbursement> rList = rserv.getAuthoredBy(authorId);
 		try (PrintWriter out = response.getWriter()) {
 			String json = om.writeValueAsString(rList);
 			response.setStatus(200);
 			out.write(json);
+		} catch (IOException e) {
+			response.setStatus(500);
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 */
+	public static void getResolved(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("application/json");
+		
+		try(PrintWriter out = response.getWriter()) {
+			List<Reimbursement> rList = rserv.getResolved();
+			List<Employee> managers = eserv.getManagers();
+			List<JsonObject> jsonArray = new LinkedList<>();
+			for(Reimbursement r : rList) {
+				JsonObject jsonObject = new JsonObject();
+				Optional<Employee> manager = managers.stream().filter(e -> e.getId() == r.getReimbResolver()).findAny();
+				jsonObject.addProperty("id", r.getId());
+				jsonObject.addProperty("amount", r.getReimbAmount());
+				jsonObject.addProperty("description", r.getReimbDescription());
+				jsonObject.addProperty("submitted", r.getReimbSubmitted().getTime());
+				jsonObject.addProperty("resolved", r.getReimbResolved().getTime());
+				jsonObject.addProperty("approved", r.isReimbApproved());
+				jsonObject.addProperty("resolver", manager.isPresent() ? manager.get().getUsername() : null);
+				jsonObject.addProperty("resolverId", r.getReimbResolver());
+				jsonArray.add(jsonObject);
+			}
+			
+			response.setStatus(200);
+			out.print(new Gson().toJson(jsonArray));
 		} catch (IOException e) {
 			response.setStatus(500);
 			e.printStackTrace();
@@ -68,6 +109,7 @@ public class ReimbursementHelper {
 	 * @param response
 	 */
 	public static void getUnresolved(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("application/json");
 		List<Reimbursement> rList = rserv.getAll().stream()
 				.filter(r -> r.getReimbResolved() == null)
 				.toList();

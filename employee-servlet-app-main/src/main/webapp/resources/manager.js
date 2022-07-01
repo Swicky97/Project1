@@ -39,6 +39,7 @@ function getEmployees() {
             console.log(employees);
             eTBody.innerHTML = "";
             for(let e of employees) {
+                // TODO: Implement veiwReimbursements
                 eTBody.innerHTML += `
                     <tr data-id=${e.id} onclick="viewReimbursements(event)">
                         <td>${e.id}</td>
@@ -50,6 +51,27 @@ function getEmployees() {
             }
         })
         .catch(console.error);
+}
+
+function getResolvedReimbursements() {
+    fetch("./reimbursement/resolved")
+        .then(res => res.json())
+        .then((reimbursements) => {
+            rTBody.innerHTML = "";
+            console.log(reimbursements);
+            for(let r of reimbursements) {
+                rTBody.innerHTML += `
+                    <tr>
+                        <td>${r.amount}</td>
+                        <td>${r.description}</td>
+                        <td>${new Date(r.submitted).toDateString()}</td>
+                        <td>${new Date(r.resolved).toDateString()}</td>
+                        <td>${r.resolver}</td>
+                        <td>${r.approved ? "Approved" : "Denied"}</td>
+                    </tr>
+                `;
+            }
+        })
 }
 
 function approve(e) {
@@ -104,7 +126,7 @@ employeesBtn.addEventListener("click", () => {
 resolvedBtn.addEventListener("click", () => {
     employeeSection.classList.remove("visible");
     unresolvedSection.classList.remove("visible");
-    getEmployees();
+    getResolvedReimbursements();
     resolvedSection.classList.add("visible");
 })
 

@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
+import com.revature.models.Role;
 
 public class EmployeeService {
 	
@@ -58,6 +59,13 @@ public class EmployeeService {
 	public String viewAccountInfo(Employee e) {
 		 Employee user = edao.findById(e.getId());
 		 return user.toString();
+	}
+
+	public List<Employee> getManagers() {
+		List<Employee> managers = edao.findAll().stream()
+				.filter(e -> e.getRole().equals(Role.Manager))
+				.toList();
+		return managers;
 	}
 	
 	public boolean updateInfo(Employee e) {

@@ -14,6 +14,11 @@ import com.revature.service.ReimbursementService;
 
 public class ReimbServiceTests {
 	
+	/**
+	 * TODO: This file was built while we were using long in place of 
+	 * timestamps for persistence. Will not function as-is
+	 */
+	
 	private ReimbursementService rserv;
 	private ReimbursementDao mockdao;
 	
