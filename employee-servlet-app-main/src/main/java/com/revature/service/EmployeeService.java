@@ -60,4 +60,8 @@ public class EmployeeService {
 		 return user.toString();
 	}
 	
+	public boolean updateInfo(Employee e) {
+		return edao.update(e);
+	}
+	
 }

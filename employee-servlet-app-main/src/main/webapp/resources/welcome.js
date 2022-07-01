@@ -3,6 +3,8 @@ const meContainer = document.getElementById("me-container");
 const reimbBtn = document.getElementById("reimb-btn");
 const viewReimbBtn = document.getElementById("view-reimb-btn");
 const myReimbContainer = document.getElementById("view-reimb-container");
+const updateInfoBtn = document.getElementById("update-info-btn");
+const updateContainer = document.getElementById("update-container");
 
 testBtn.addEventListener("click", async () => {
     let data = await getMe();
@@ -27,3 +29,31 @@ viewReimbBtn.addEventListener("click", async () => {
     	<p>${data.reimbAmount}</p>
     `;
 });
+
+updateInfoBtn.addEventListener("click", async () => {
+	let data = await getMe();
+	console.log(data);
+	updateContainer.innerHTML = `
+		<form method="POST" action="update">
+		
+		<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
+		
+		<label>First Name: </label> 
+		<input type="text" name="firstname" placeholder="Enter new first name"> <br /> 
+		
+		<label>Last Name: </label> 
+		<input type="text" name="lastname" placeholder="Enter new last name"> <br /> 
+
+		<label>Username: </label> 
+		<input type="text" name="username" placeholder="Enter new username"> <br /> 
+			
+		<label>Password: </label>
+		<input type="password" name="password" placeholder="Enter new password">
+
+		<input type="submit" value="Update information">
+
+		</form>
+	`;
+});
+
+
