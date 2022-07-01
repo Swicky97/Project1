@@ -25,6 +25,7 @@ public class FrontController extends HttpServlet {
 		// http://localhost:8080/employee-servlet-app/login -- we want to capture login
 		// http://localhost:8080/employee-servlet-app/employees -- if they go here it returns all employees in the DB
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		System.out.println("GET " + URI);
 		// we're capturing the very last part of the URI
 		// set up a switch case statement in which we call the appropriate functionality based on the URI returned
 		switch(URI) {
@@ -63,6 +64,7 @@ public class FrontController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		System.out.println("POST " + URI);
 		switch(URI) {
 		case "login":
 			// invoke some function from the RequestHelper
@@ -87,6 +89,7 @@ public class FrontController extends HttpServlet {
 	
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		System.out.println("PUT " + URI);
 		switch(URI) {
 		case "reimbursement/approve":
 			ReimbursementHelper.processApprove(request, response);
@@ -95,6 +98,7 @@ public class FrontController extends HttpServlet {
 			ReimbursementHelper.processDeny(request, response);
 			break;
 		case "update":
+			System.out.println("Called /update wiht PUT method");
 			RequestHelper.updateUser(request, response);
 			break;
 		default:
@@ -107,6 +111,7 @@ public class FrontController extends HttpServlet {
 
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		final String URI = request.getRequestURI().replace("/employee-servlet-app/", "");
+		System.out.println("DELETE " + URI);
 		switch(URI) {
 		case "reimbursement":
 			ReimbursementHelper.processDelete(request, response);

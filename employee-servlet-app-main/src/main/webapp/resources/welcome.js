@@ -34,7 +34,7 @@ updateInfoBtn.addEventListener("click", async () => {
 	let data = await getMe();
 	console.log(data);
 	updateContainer.innerHTML = `
-		<form method="POST" action="update" onsubmit="getUpdate(event)">
+		<form onsubmit="getUpdate(event)">
 		
 		<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
 		
@@ -70,7 +70,7 @@ function getUpdate(e) {
     fetch(`./update`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ firstName, lastName, username, password })
+        body: JSON.stringify({ firstName })
     }).then(res => res.json())
         .catch(e => console.error(e));
 }
