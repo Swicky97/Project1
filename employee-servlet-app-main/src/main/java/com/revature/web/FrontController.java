@@ -47,6 +47,9 @@ public class FrontController extends HttpServlet {
 		case "reimbursement/mine":
 			ReimbursementHelper.getUsersReimbursements(request, response);
 			break;
+		case "reimbursement/mine/resolved":
+			ReimbursementHelper.getUsersReimbursements(request, response);
+			break;
 		case "reimbursement/resolved":
 			ReimbursementHelper.getResolved(request, response);
 			break;
