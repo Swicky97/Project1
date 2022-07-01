@@ -1,7 +1,10 @@
 package com.revature.web;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,8 +14,12 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
+import com.revature.models.Reimbursement;
 import com.revature.models.Role;
 import com.revature.service.EmployeeService;
 
@@ -168,6 +175,81 @@ public class RequestHelper {
 		} catch (IOException e1) {
 			response.setStatus(500);
 			e1.printStackTrace();
+		}
+		
+	}
+	
+	public static void getReimbursements(HttpServletRequest request, HttpServletResponse response) {
+		// TODO: Think about what user information we actually want to send (probably not the password)
+		HttpSession session = request.getSession();
+		Employee e = (Employee) session.getAttribute("the-user");
+		try (PrintWriter out = response.getWriter()) {
+			String json = om.writeValueAsString(e);
+			response.setContentType("application/json");
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e1) {
+			response.setStatus(500);
+			e1.printStackTrace();
+		}
+		
+	}
+	
+	public static void getReimbursementsById(HttpServletRequest request, HttpServletResponse response) {
+		// TODO: Think about what user information we actually want to send (probably not the password)
+		HttpSession session = request.getSession();
+		Employee e = (Employee) session.getAttribute("the-user");
+		try (PrintWriter out = response.getWriter()) {
+			String json = om.writeValueAsString(e);
+			response.setContentType("application/json");
+			response.setStatus(200);
+			out.write(json);
+		} catch (IOException e1) {
+			response.setStatus(500);
+			e1.printStackTrace();
+		}
+		
+	}
+	
+	public static void updateUser(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("application/json");
+		try (PrintWriter out = response.getWriter()) {
+			HttpSession session = request.getSession();
+			Employee user = (Employee) session.getAttribute("the-user");
+			if(user == null) {
+				response.setStatus(401);
+				out.print("{\"message\": \"You must be logged in to submit a reimbursement request.\"}");
+				return;
+			}
+			
+			JsonParser jsonParser = new JsonParser();
+			JsonElement root = jsonParser.parse(new InputStreamReader((InputStream) request.getInputStream()));
+			JsonObject jsonobj = root.getAsJsonObject();
+
+			String firstname = jsonobj.get("firstname").getAsString();
+			String lastname = jsonobj.get("lastname").getAsString();
+			String username = jsonobj.get("username").getAsString();
+			String password = jsonobj.get("password").getAsString();
+			Employee e = new Employee();
+			if(firstname != null) {
+				e.setFirstName(firstname);
+			}
+			if(lastname != null) {
+				e.setLastName(firstname);
+			}
+			if(username != null) {
+				e.setUsername(username);
+			}
+			if(password != null) {
+				e.setPassword(password);
+			}
+			eserv.updateInfo(e);
+			String json = om.writeValueAsString(e);
+			response.setStatus(200);
+			out.print(json);
+		} catch (IOException e) {
+			response.setStatus(500);
+			e.printStackTrace();
 		}
 		
 	}
