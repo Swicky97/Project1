@@ -19,6 +19,7 @@
     <url-pattern>/register</url-pattern>
     <url-pattern>/update</url-pattern>
     <url-pattern>/dashboard</url-pattern>
+    <url-pattern>/update</url-pattern>
     <url-pattern>/reimbursement</url-pattern>
     <url-pattern>/reimbursement/approve</url-pattern>
     <url-pattern>/reimbursement/deny</url-pattern>
