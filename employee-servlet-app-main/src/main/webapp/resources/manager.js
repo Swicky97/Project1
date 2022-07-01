@@ -106,6 +106,16 @@ function deny(e) {
         .catch(console.error);
 }
 
+function getUpdate(e) {
+	e.preventDefault();
+    fetch(`./update`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ id })
+    }).then(res => res.json())
+        .catch(e => console.error(e));
+}
+
 employeesBtn.addEventListener("click", () => {
     resolvedSection.classList.remove("visible");
     unresolvedSection.classList.remove("visible");

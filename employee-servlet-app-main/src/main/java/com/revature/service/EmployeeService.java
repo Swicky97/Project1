@@ -68,4 +68,8 @@ public class EmployeeService {
 		return managers;
 	}
 	
+	public boolean updateInfo(Employee e) {
+		return edao.update(e);
+	}
+	
 }

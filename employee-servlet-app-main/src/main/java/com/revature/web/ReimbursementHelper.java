@@ -55,6 +55,7 @@ public class ReimbursementHelper {
 	 * @param response
 	 */
 	public static void getAssociatedReimbursements(HttpServletRequest request, HttpServletResponse response) {
+
 		response.setContentType("application/json");
 		int authorId = Integer.parseInt(request.getParameter("authorId"));
 		List<Reimbursement> rList = rserv.getAuthoredBy(authorId);
@@ -141,7 +142,7 @@ public class ReimbursementHelper {
 				return;
 			}
 			int authorId = user.getId();
-			List<Reimbursement> rList = rserv.getAuthoredBy(authorId);
+			List<Reimbursement> rList = rserv.getAuthorById(authorId);
 			String json = om.writeValueAsString(rList);
 			response.setStatus(200);
 			out.write(json);

@@ -94,6 +94,9 @@ public class FrontController extends HttpServlet {
 		case "reimbursement/deny":
 			ReimbursementHelper.processDeny(request, response);
 			break;
+		case "update":
+			RequestHelper.updateUser(request, response);
+			break;
 		default:
 			response.setStatus(404);
 			response.setContentType("application/json");

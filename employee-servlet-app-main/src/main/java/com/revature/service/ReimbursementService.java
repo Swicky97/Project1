@@ -72,7 +72,7 @@ public class ReimbursementService {
 		return rdao.findAll();
 	}
 
-	public List<Reimbursement> getAuthoredBy(int authorId) {
+	public List<Reimbursement> getAuthorById(int authorId) {
 		List<Reimbursement> result = rdao.findAll().stream()
 				.filter(r -> r.getReimbAuthor() == authorId)
 				.toList();
