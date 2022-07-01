@@ -3,32 +3,81 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Manager Dashboard</title>
+		<style>
+			section {
+				display: none;
+			}
+
+			section.visible {
+				display: block;
+			}
+		</style>
 	</head>
 	<body>
 		<header>
-			<h1>'Sup, Manager</h1>
+			<h1 style="text-align: center;">'Sup, Manager</h1>
+
+			<form method="POST" action="logout" style="float: right;">
+				<input type="submit" value="Log Out">
+			</form>
 		</header>
 
 		<main>
-			<h2>Outstanding Requests</h2>
-			<table>
-				<thead>
-					<tr>
-						<th>Amount</th>
-						<th>Description</th>
-						<th>Action</th>
-					</tr>
-				</thead>
-				<tbody>
+			<section class="visible" style="text-align: center;">
+				<button id="view-unresolved">View Unresolved Requests</button>
+				<button id="view-employees">View Employees</button>
+				<button id="view-resolved">View Resolved Requests</button>
+			</section>
+			<br>
+			<section id="unresolved">
+				<h2>Unresolved Requests</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Submitted</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="unresolved-body">
+						
+					</tbody>
+				</table>
+			</section>
+			<section id="employees">
+				<h2>Employees</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Role</th>
+						</tr>
+					</thead>
+					<tbody id="employees-body">
 
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</section>
+			<section id="resolved">
+				<h2>Resolved Requests</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Action</th>
+						</tr>
+					</thead id="resolved-body">
+					<tbody>
+	
+					</tbody>
+				</table>
+			</section>
 		</main>
 		
-		<form method="POST" action="logout">
-			<input type="submit" value="Log Out">
-		</form>
-
 		<script src="./resources/manager.js"></script>
 	</body>
 </html>
