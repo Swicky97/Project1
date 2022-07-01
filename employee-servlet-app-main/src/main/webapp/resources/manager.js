@@ -74,6 +74,10 @@ function getResolvedReimbursements() {
         })
 }
 
+function viewReimbursements(e) {
+    e.preventDefault();
+}
+
 function approve(e) {
     e.preventDefault();
     const id = e.target.getAttribute("data-id");
@@ -104,16 +108,6 @@ function deny(e) {
         }
     })
         .catch(console.error);
-}
-
-function getUpdate(e) {
-	e.preventDefault();
-    fetch(`./update`, {
-        method: "PUT",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ id })
-    }).then(res => res.json())
-        .catch(e => console.error(e));
 }
 
 employeesBtn.addEventListener("click", () => {

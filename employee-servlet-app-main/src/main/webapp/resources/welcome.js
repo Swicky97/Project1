@@ -34,12 +34,12 @@ updateInfoBtn.addEventListener("click", async () => {
 	let data = await getMe();
 	console.log(data);
 	updateContainer.innerHTML = `
-		<form method="POST" action="update">
+		<form method="POST" action="update" onsubmit="getUpdate(event)">
 		
 		<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
 		
 		<label>First Name: </label> 
-		<input type="text" name="firstname" placeholder="Enter new first name"> <br /> 
+		<input id="first-name" type="text" name="firstname" placeholder="Enter new first name"> <br /> 
 		
 		<label>Last Name: </label> 
 		<input type="text" name="lastname" placeholder="Enter new last name"> <br /> 
@@ -56,4 +56,15 @@ updateInfoBtn.addEventListener("click", async () => {
 	`;
 });
 
-
+function getUpdate(e) {
+	e.preventDefault();
+    const firstName = document.getElementById("first-name").value;
+	//TODO: Grab other form input values
+	console.log(firstName);
+    fetch(`./update`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({ firstName, lastName, username, password })
+    }).then(res => res.json())
+        .catch(e => console.error(e));
+}
