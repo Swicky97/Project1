@@ -17,11 +17,15 @@
     <url-pattern>/logout</url-pattern>
     <url-pattern>/employees</url-pattern>
     <url-pattern>/register</url-pattern>
+    <url-pattern>/update</url-pattern>
     <url-pattern>/dashboard</url-pattern>
     <url-pattern>/reimbursement</url-pattern>
     <url-pattern>/reimbursement/approve</url-pattern>
     <url-pattern>/reimbursement/deny</url-pattern>
     <url-pattern>/reimbursement/mine</url-pattern>
+    <url-pattern>/reimbursement/mine/resolved</url-pattern>
+    <url-pattern>/reimbursement/resolved</url-pattern>
+    <url-pattern>/reimbursement/unresolved</url-pattern>
     <!-- http://localhost:8080/employee-servlet-app/login -->
     <!-- http://localhost:8080/employee-servlet-app/employees -->
     <!-- http://localhost:8080/employee-servlet-app/register -->

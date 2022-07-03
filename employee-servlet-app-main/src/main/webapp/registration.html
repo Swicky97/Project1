@@ -3,14 +3,18 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Registration</title>
+<link rel="stylesheet" href="assets/styles/style.css">
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Josefin+Sans:wght@300&family=Lobster&display=swap');
+	</style>
 </head>
-<body>
+<body class="body3">
 
-	<h1>Welcome Stranger</h1>
-	<h3>Please register below:</h3>
+	<div class="register">
+	<h1 class="stranger">Welcome New Individual</h1>
+	<h4 class="h42">Please register below:</h4>
 	
-	<form method="POST" action="welcome.html">
-		
+	<form method="POST" action="register">
 		<!-- http://localhost:8080/employee-servlet-app/register -->
 		
 		<!-- 
@@ -22,22 +26,22 @@
 		
 		 -->
 
-		<label>First Name</label> 
+		<label for="firstname" class="regstuff">First Name</label> 
 		<input type="text" name="firstname" placeholder="Enter a first name"> <br /> 
 		
-		<label>Last Name</label> 
+		<label for="lastname" class="regstuff">Last Name</label> 
 		<input type="text" name="lastname" placeholder="Enter a last name"> <br /> 
 
-		<label>Username</label> 
+		<label for="username" class="regstuff">Username</label> 
 		<input type="text" name="username" placeholder="Enter a username"> <br /> 
 			
-		<label>Password</label>
+		<label for="password" class="regstuff">Password</label>
 		<input type="password" name="password" placeholder="Enter a password">
+<br />
+		<input class="input2" type="submit" value="Register">
 
-		<input type="submit" value="Register!">
-</form>
 	</form>
 	
-
+</div>
 </body>
 </html>

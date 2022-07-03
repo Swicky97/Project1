@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Manager Dashboard</title>
+		<style>
+			section {
+				display: none;
+			}
+
+			section.visible {
+				display: block;
+			}
+			@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Josefin+Sans:wght@300&family=Lobster&display=swap');
+		</style>
+		<link rel="stylesheet" href="assets/styles/style.css">
+	</head>
+	<body class="body4">
+		<header>
+
+			<form method="POST" action="logout" style="float: right;">
+				<input class="input" type="submit" value="Log Out">
+			</form>
+
+			<h1 class="h1" style="text-align: center;">'Sup, Manager</h1>
+			<h2 class="h2">Beach Bum Reimburse Inc</h2>
+			<h3 class="h3">Where Keepin' it Groovy is our only Company Policy, <br />But... Also like getting your money back too...</h3>
+		</header>
+
+		<main>
+			<section class="visible" style="text-align: center;">
+				<button class="input" id="view-unresolved">View Unresolved Requests</button>
+				<button class="input" id="view-employees">View Employees</button>
+				<button class="input" id="view-resolved">View Resolved Requests</button>
+			</section>
+			<br>
+			<section class="text1" id="unresolved">
+				<h2>Unresolved Requests</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Submitted</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="unresolved-body">
+						
+					</tbody>
+				</table>
+			</section>
+			<section class="text1" id="employees">
+				<h2>Employees</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Username</th>
+							<th>Role</th>
+						</tr>
+					</thead>
+					<tbody id="employees-body">
+
+					</tbody>
+				</table>
+			</section>
+			<section class="text1" id="employee-single">
+				<h2 id="employee-name"></h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Submitted</th>
+							<th>Resolved</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="employee-requests-body">
+	
+					</tbody>
+				</table>
+			</section>
+			<section class="text1" id="resolved">
+				<h2>Resolved Requests</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Submitted</th>
+							<th>Resolved</th>
+							<th>Resolved By</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody id="resolved-body">
+	
+					</tbody>
+				</table>
+			</section>
+		</main>
+		
+		
+		<script src="./resources/manager.js"></script>
+	</body>
+</html>

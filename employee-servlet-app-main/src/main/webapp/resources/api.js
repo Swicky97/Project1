@@ -3,8 +3,8 @@
  * @param {Object} reimbursment with params "amount" and "description"
  * @returns {Object} the new reimbursment
  */
- async function addReimbursment(reimbursment) {
-    return await fetch("./reimbursments", {
+async function addReimbursment(reimbursment) {
+    return await fetch("./reimbursement", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -25,22 +25,13 @@ async function getMe() {
         .catch(e => console.error(e));
 }
 
-/**
- * Retrieve list of current user's reimbursments
- * @returns {Object[]}
- */
-async function getMyReimbursments() {
-    return await fetch("./reimbursments/mine")
-        .then(res => res.json())
-        .catch(e => console.error(e));
-}
 
 /**
  * For retrieving the entire list of reimbursments
  * @returns {Object[]}
  */
 async function getReimbursments() {
-    return await fetch("./reimbursments")
+    return await fetch("./reimbursement")
         .then(res => res.json())
         .catch(e => console.error(e));
 }
