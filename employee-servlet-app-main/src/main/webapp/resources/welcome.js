@@ -150,5 +150,3 @@ function getMyResolvedReimbursements() {
         })
         .catch(console.error);
 }
-
-

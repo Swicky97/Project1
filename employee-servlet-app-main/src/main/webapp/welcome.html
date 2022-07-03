@@ -4,44 +4,42 @@
 <meta charset="ISO-8859-1">
 <title>Welcome!</title>
 
-<!-- Internal CSS styling -->
+<link rel="stylesheet" href="assets/styles/style.css"/>
 <style>
-h1 {
-	color: red;
-}
-</style>
-
+	@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Lobster&display=swap');
+	
+	
+	</style>
 </head>
-<body>
+<body class="body">
 
-	<h1 id="welcome-h1">Welcome to the home page!</h1>
-	<h4>You have successfully registered</h4>
+	<h1 class="h1" id="welcome-h1">Welcome Home!</h1>
+	<h4 class="h41">You've Successfully Logged in!</h4>
 
 	<br>
 	<br>
-	<form method="POST" action="reimbursement"
-		style="border: 2px solid black; padding: 1rem;">
-		<label for="amount">Amount:</label> <br> <input type="number"
-			name="amount" id="amount" placeholder="Amount to reimburse">
-		<br> <label for="description">Description:</label> <br>
-		<textarea id="description" name="description" cols="30" rows="5"
+	<form method="POST" action="reimbursement" class="amount">
+		<label for="amount" class="text">Amount:</label> <br /> <br> <input type="number"
+			name="amount" id="amount" placeholder="Amount to reimburse"> <br />
+		<br> <label for="description" class="text">Description:</label> <br> <br />
+		<textarea id="description" name="description" cols="30" rows="5" 
 			placeholder="Enter a description."></textarea>
-		<br> <input id="reimb-btn" type="submit"
+		<br> <input class="input" id="reimb-btn" type="submit"
 			value="Create reimbursement">
 	</form>
 	<br>
 	<br>
-	<button id="update-info-btn">Update Information</button>
-	<div id="update-container"></div>
+	<button class="input" id="update-info-btn">Update Information</button>
+	<div id="update-container" class="div1"></div>
 	<br>
-	<button id="view-reimb-btn">Active Reimbursements</button>
-	<div id="view-reimb-container"></div>
+	<button class="input" id="view-reimb-btn">Active Reimbursements</button>
+	<div id="view-reimb-container" class="div1"></div>
 	<br>
-	<button id="view-resolved-reimb-btn">Resolved Reimbursements</button>
-	<div id="view-resolved-reimb-container"></div>
+	<button class="input" id="view-resolved-reimb-btn">Resolved Reimbursements</button>
+	<div id="view-resolved-reimb-container" class="div1"></div>
 	<br>
 	<form method="POST" action="logout">
-		<input type="submit" value="Log Out">
+		<input class="input" type="submit" value="Log Out">
 	</form>
 
 	<script src="./resources/api.js"></script>

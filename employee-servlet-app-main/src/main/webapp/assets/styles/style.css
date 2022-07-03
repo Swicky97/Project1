@@ -1,0 +1,267 @@
+
+.body{
+    background-image: url("/employee-servlet-app/resources/img/website.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.body2{
+    background-image: url("/employee-servlet-app/resources/img/afternoon.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.body3{
+    background-image: url("/employee-servlet-app/resources/img/register.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.body4{
+    background-image: url("/employee-servlet-app/resources/img/manager.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.h1 {
+    font-family: 'Lobster', cursive;
+    font-size: 75px;
+    text-shadow: 4px 4px navy;
+    color:white;
+    border: 5px solid navy;
+    border-radius: 50px;
+    background-color: rgb(24, 98, 200);
+    text-align: center;
+    margin-left: 250px;
+    margin-right: 250px;
+    padding: 15px;
+}
+
+.h4{
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 4px lightsalmon;
+}
+
+.h41{
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 4px navy;
+}
+
+.h42{
+    font-family: 'Lobster', cursive;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 4px rgb(95, 190, 95);
+}
+
+.h2{
+    font-family: 'Lobster', cursive;
+    font-size: 35px;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 4px navy;
+}
+
+.h3{
+    font-family: 'Lobster', cursive;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    text-shadow: 4px 4px navy;
+}
+
+.welcome {
+    font-family: 'Lobster', cursive;
+    font-size: 75px;
+    color: white;
+    text-shadow: 4px 4px lightsalmon;
+}
+
+.stranger{
+    font-family: 'Lobster', cursive;
+    font-size: 75px;
+    color: white;
+    text-shadow: 4px 4px rgb(95, 190, 95);
+}
+
+.text{
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 25px;
+    color: white;
+    padding: 5px;
+}
+
+.text1 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 25px;
+    color: white;
+    padding: 5px;
+    text-align: center;
+}
+
+.logpass {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 25px;
+    color: white;
+    text-shadow:1px 1px rgb(209, 88, 40);
+    margin: 5px;
+}
+
+.regstuff {
+    font-family: 'Bree Serif', sans-serif;
+    font-size: 25px;
+    color: white;
+    text-shadow:1px 1px rgb(95, 190, 95);
+    margin: 5px;
+}
+
+.input{
+    font-family: 'Josefin Sans', sans-serif;
+    display: inline-block;
+    padding: 15px 25px;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: white;
+    background-color: rgb(24, 98, 200);
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 9px rgb(56, 56, 179);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.input:hover {
+        background-color: navy
+    }
+
+.input:active {
+        background-color: rgb(112, 160, 255);
+        box-shadow: 0 5px rgb(23, 23, 157);
+        transform: translateY(4px);
+      }
+
+
+
+
+      
+
+.input1{
+        font-family: 'Josefin Sans', sans-serif;
+        display: inline-block;
+        padding: 15px 25px;
+        font-size: 15px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: white;
+        background-color: rgb(240, 136, 95);
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 9px orange;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        margin-left: 10px;
+    }
+.input1:hover {
+            background-color: lightsalmon;
+        }
+    
+.input1:active {
+            background-color: rgb(201, 114, 79);
+            box-shadow: 0 5px rgb(209, 88, 40);
+            transform: translateY(4px);
+          }
+
+
+
+
+.input2{
+            font-family: 'Josefin Sans', sans-serif;
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: white;
+            background-color: rgb(95, 190, 95);
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px rgb(92, 238, 119);
+            margin-top: 20px;
+            margin-bottom: 15px;
+            
+        }
+.input2:hover {
+                background-color: rgb(54, 216, 54);
+            }
+        
+.input2:active {
+                background-color: rgb(54, 216, 54);
+                box-shadow: 0 5px rgb(95, 190, 95);
+                transform: translateY(4px);
+              }
+
+
+
+
+
+.amount{
+    border: 5px solid navy;
+    border-radius: 50px;
+    padding: 20px;
+    background-color: rgb(85, 145, 213);
+    margin-right: 1000px;
+}
+
+.reim{
+    margin: 25px;
+}
+
+.div1 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 15px;
+    color: white;
+    padding-left: 15px;
+}
+
+.buttonpad {
+    padding-left: 20px;
+}
+
+.loginpage{
+    border: 10px solid rgb(209, 88, 40);
+    border-radius: 500px;
+    background-color: rgb(247, 189, 166);
+    float: center;
+    text-align: center;
+    padding: 25px;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 150px;
+    margin-bottom:150px;
+}
+
+.register{
+    border: 10px solid rgb(54, 216, 54);
+    border-radius: 100px;
+    background-color: rgb(231, 231, 31);
+    float: center;
+    text-align: center;
+    padding: 25px;
+    margin-left: 300px;
+    margin-right: 300px;
+    margin-top: 150px;
+    margin-bottom:150px;
+}
