@@ -2,6 +2,7 @@ package com.revature.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import com.revature.dao.EmployeeDao;
 import com.revature.models.Employee;
@@ -64,7 +65,7 @@ public class EmployeeService {
 	public List<Employee> getManagers() {
 		List<Employee> managers = edao.findAll().stream()
 				.filter(e -> e.getRole().equals(Role.Manager))
-				.toList();
+				.collect(Collectors.toList());
 		return managers;
 	}
 	
