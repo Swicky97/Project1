@@ -1,18 +1,10 @@
-const testBtn = document.getElementById("me-btn");
-const meContainer = document.getElementById("me-container");
 const reimbBtn = document.getElementById("reimb-btn");
 const viewReimbBtn = document.getElementById("view-reimb-btn");
-const myReimbContainer = document.getElementById("view-reimb-container");
+const viewReimbContainer = document.getElementById("view-reimb-container");
 const updateInfoBtn = document.getElementById("update-info-btn");
 const updateContainer = document.getElementById("update-container");
-
-testBtn.addEventListener("click", async () => {
-    let data = await getMe();
-    console.log(data);
-    meContainer.innerHTML = `
-        <p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
-    `;
-});
+const viewResolvedReimbBtn = document.getElementById("view-resolved-reimb-btn");
+const viewResolvedReimbContainer = document.getElementById("view-resolved-reimb-container");
 
 reimbBtn.addEventListener("click", async function(e) {
     e.preventDefault();
@@ -23,11 +15,45 @@ reimbBtn.addEventListener("click", async function(e) {
 });
 
 viewReimbBtn.addEventListener("click", async () => {
-    let data = await getMyReimbursments();
-    console.log(data);
-    myReimbContainer.innerHTML = `
-    	<p>${data.reimbAmount}</p>
+    viewReimbContainer.innerHTML = `
+    	<section id="open">
+				<h2>Unresolved Requests</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Submitted</th>
+						</tr>
+					</thead>
+					<tbody id="open-body">
+						
+					</tbody>
+				</table>
+			</section>
     `;
+    getMyReimbursements();
+});
+
+viewResolvedReimbBtn.addEventListener("click", async () => {
+    viewResolvedReimbContainer.innerHTML = `
+    	<section id="open">
+				<h2>Resolved Requests</h2>
+				<table>
+					<thead>
+						<tr>
+							<th>Amount</th>
+							<th>Description</th>
+							<th>Submitted</th>
+						</tr>
+					</thead>
+					<tbody id="resolved-body">
+						
+					</tbody>
+				</table>
+			</section>
+    `;
+    getMyResolvedReimbursements();
 });
 
 updateInfoBtn.addEventListener("click", async () => {
@@ -36,7 +62,9 @@ updateInfoBtn.addEventListener("click", async () => {
 	updateContainer.innerHTML = `
 		<form onsubmit="getUpdate(event)">
 		
-		<p>First Name: ${data.firstName} Last Name: ${data.lastName} Username: ${data.username}</p>
+		<p>First Name: ${data.firstName}&emsp; Last Name: ${data.lastName}&emsp; Username: ${data.username}</p>
+		
+		<h4>Update profile information below</h4>
 		
 		<label>First Name: </label> 
 		<input id="first-name" type="text" name="firstname" placeholder="Enter new first name"> <br /> 
@@ -70,7 +98,56 @@ function getUpdate(e) {
     fetch(`./update`, {
         method: "PUT",
         headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ firstName })
+        body: JSON.stringify({ firstName, lastName, username, password })
     }).then(res => res.json())
         .catch(e => console.error(e));
 }
+
+function getMyReimbursements() {
+	const oTBody = document.getElementById("open-body");
+    fetch("./reimbursement/mine")
+        .then(res => res.json())
+        .then((reimbursements) => {
+            console.log(reimbursements);
+            oTBody.innerHTML = "";
+            for(let r of reimbursements) {
+				if(r.reimbResolved == null){
+                console.log(r);
+                oTBody.innerHTML += `
+                    <tr>
+                        <td>${r.reimbAmount}</td>
+                        <td>${r.reimbDescription}</td>
+                        <td>${new Date(r.reimbSubmitted).toDateString()}</td> 
+                    </tr>
+                `;
+                }
+            }
+            
+        })
+        .catch(console.error);
+}
+
+function getMyResolvedReimbursements() {
+	const rTBody = document.getElementById("resolved-body");
+    fetch("./reimbursement/mine/resolved")
+        .then(res => res.json())
+        .then((reimbursements) => {
+            console.log(reimbursements);
+            rTBody.innerHTML = "";
+            for(let r of reimbursements) {
+				if(r.reimbResolved != null){
+                console.log(r);
+                rTBody.innerHTML += `
+                    <tr>
+                        <td>${r.reimbAmount}</td>
+                        <td>${r.reimbDescription}</td>
+                        <td>${new Date(r.reimbSubmitted).toDateString()}</td>
+                    </tr>
+                `;
+                }
+            }
+            
+        })
+        .catch(console.error);
+}
+

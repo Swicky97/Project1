@@ -11,25 +11,30 @@
 			section.visible {
 				display: block;
 			}
+			@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Josefin+Sans:wght@300&family=Lobster&display=swap');
 		</style>
+		<link rel="stylesheet" href="assets/styles/style.css">
 	</head>
-	<body>
+	<body class="body4">
 		<header>
-			<h1 style="text-align: center;">'Sup, Manager</h1>
 
 			<form method="POST" action="logout" style="float: right;">
-				<input type="submit" value="Log Out">
+				<input class="input" type="submit" value="Log Out">
 			</form>
+
+			<h1 class="h1" style="text-align: center;">'Sup, Manager</h1>
+			<h2 class="h2">Beach Bum Reimburse Inc</h2>
+			<h3 class="h3">Where Keepin' it Groovy is our only Company Policy, <br />But... Also like getting your money back too...</h3>
 		</header>
 
 		<main>
 			<section class="visible" style="text-align: center;">
-				<button id="view-unresolved">View Unresolved Requests</button>
-				<button id="view-employees">View Employees</button>
-				<button id="view-resolved">View Resolved Requests</button>
+				<button class="input" id="view-unresolved">View Unresolved Requests</button>
+				<button class="input" id="view-employees">View Employees</button>
+				<button class="input" id="view-resolved">View Resolved Requests</button>
 			</section>
 			<br>
-			<section id="unresolved">
+			<section class="text1" id="unresolved">
 				<h2>Unresolved Requests</h2>
 				<table>
 					<thead>
@@ -45,7 +50,7 @@
 					</tbody>
 				</table>
 			</section>
-			<section id="employees">
+			<section class="text1" id="employees">
 				<h2>Employees</h2>
 				<table>
 					<thead>
@@ -61,7 +66,7 @@
 					</tbody>
 				</table>
 			</section>
-			<section id="employee-single">
+			<section class="text1" id="employee-single">
 				<h2 id="employee-name"></h2>
 				<table>
 					<thead>
@@ -78,7 +83,7 @@
 					</tbody>
 				</table>
 			</section>
-			<section id="resolved">
+			<section class="text1" id="resolved">
 				<h2>Resolved Requests</h2>
 				<table>
 					<thead>
@@ -97,6 +102,7 @@
 				</table>
 			</section>
 		</main>
+		
 		
 		<script src="./resources/manager.js"></script>
 	</body>

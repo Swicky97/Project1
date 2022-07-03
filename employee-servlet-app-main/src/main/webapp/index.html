@@ -3,33 +3,39 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Employee Servlet App</title>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&family=Lobster&display=swap');
+	</style>
+	<link rel="stylesheet" href="assets/styles/style.css"/>
 </head>
-<body>
+<body class="body2">
 
-	<h1>Welcome Employee</h1>
-	<h3>Please login below:</h3>
+	<div class="loginpage">
+	<h1 class="welcome" >Welcome Employee</h1>
+	<h4 class="h4">Please login below:</h4>
 
 
 	<!--  POST requests obfuscate (hide) the parameters and dont' show it in the URL -->
 	<form method="POST" action="login" id="login">
 		<!-- http://localhost:8080/employee-servlet-app/login -->
 
-		<label>Username</label> 
+		<label for="username" class="logpass">Username</label> 
 		<input id="username" type="text" name="username" placeholder="Enter a username"> <br /> 
-			
-		<label>Password</label>
-		<input id="password" type="password" name="password" placeholder="Enter a password">
+			<br />
+		<label for="passowrd" class="logpass">Password</label>
+		<input class=""id="password" type="password" name="password" placeholder="Enter a password">
 
-		<input type="submit" value="Login!">
+		<input type="submit" class="input1" value="Login">
 
 	</form>
 	
 	<br />
 	
 	<!--Whenever I want a button to submit sometype of HTTP request it has to be in a FORM -->
+	<div>
 	<form method="GET" action="registration.html"> 
 	
-		<input type="submit" value="Register!">
+		<input class="input1" type="submit" value="Register">
 	
 	</form>
 	
@@ -39,9 +45,10 @@
 		<!--  edit web.xml
 			  edit Frontcontroller
 			  add functionality to request helper -->
-		<input type="submit" value="See All Employees">
+		<input class="input1" type="submit" value="See All Employees">
 	
 	</form>
-
+	</div>
+</div>
 </body>
 </html>
