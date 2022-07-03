@@ -112,7 +112,7 @@ public class EmployeeDao {
 			query.setParameter("firstname", e.getFirstName());
 			query.setParameter("lastname", e.getLastName());
 			query.setParameter("password", e.getPassword());
-			query.setParameter("username", e.getFirstName());
+			query.setParameter("username", e.getUsername());
 			result = query.executeUpdate();
 		}
 		tx.commit();
