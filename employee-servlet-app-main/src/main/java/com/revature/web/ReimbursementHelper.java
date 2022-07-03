@@ -8,6 +8,7 @@ import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -112,7 +113,7 @@ public class ReimbursementHelper {
 		response.setContentType("application/json");
 		List<Reimbursement> rList = rserv.getAll().stream()
 				.filter(r -> r.getReimbResolved() == null)
-				.toList();
+				.collect(Collectors.toList());
 		System.out.println(rList);
 		try(PrintWriter out = response.getWriter()) {
 			response.setContentType("application/json");
