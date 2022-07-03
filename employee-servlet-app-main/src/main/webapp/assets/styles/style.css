@@ -265,3 +265,34 @@
     margin-top: 150px;
     margin-bottom:150px;
 }
+
+.center {
+	margin: 1rem auto;
+}
+
+table {
+    border: 5px solid navy;
+    border-radius: 1rem;
+	padding: 1rem;
+	background-color: rgb(24, 98, 200);
+}
+
+tr, td, th {
+	margin: 0;
+	border: none;
+}
+
+
+table .input {
+	background-color: rgb(209, 88, 40);
+}
+
+tr.clickable {
+	color:  rgb(247, 189, 166);
+}
+
+tr.clickable:hover {
+	cursor: pointer;
+	background-color: navy;
+}
+

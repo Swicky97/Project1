@@ -24,8 +24,8 @@ function getOutstandingReimbursements() {
                         <td>${r.reimbDescription}</td>
                         <td>${new Date(r.reimbSubmitted).toDateString()}</td>
                         <td>
-                            <button data-id=${r.id} onclick="approve(event)">Approve</button>
-                            <button data-id=${r.id} onclick="deny(event)">Deny</button>
+                            <button data-id=${r.id} class="input" onclick="approve(event)">Approve</button>
+                            <button data-id=${r.id} class="input" onclick="deny(event)">Deny</button>
                         </td>
                     </tr>
                 `;
